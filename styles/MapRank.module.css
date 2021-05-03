@@ -1,0 +1,11 @@
+.container {
+  border: 2px solid white;
+  text-align: center;
+  width: 60px;
+  padding: 2px 0;
+  border-radius: 10px;
+}
+.container p {
+  margin: 0;
+  padding: 0;
+}
