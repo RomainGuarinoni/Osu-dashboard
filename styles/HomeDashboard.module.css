@@ -2,4 +2,43 @@
   flex: 1;
   background-color: var(--light-main);
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+}
+.header h1 {
+  margin: 25px 40px;
+  letter-spacing: 2px;
+}
+
+.graphContainer {
+  flex: 1;
+  border: 2px solid red;
+  width: 100%;
+}
+
+.footer {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.brandIcon {
+  font-size: 25px;
+  color: white;
+  margin: 10px 20px 10px;
+  cursor: pointer;
+  transition: all ease 200ms;
+}
+.brandIcon:hover {
+  color: var(--hover);
 }
