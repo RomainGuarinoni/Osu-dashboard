@@ -8,7 +8,9 @@ export default function Connect() {
   const [error, setError] = useState(false);
   function Connect(e) {
     e.preventDefault();
-    console.log(link);
+    if (!error) {
+      console.log(link);
+    }
   }
   function verifyLinkInput(value) {
     setLink(value);
@@ -36,13 +38,19 @@ export default function Connect() {
               onChange={(e) => verifyLinkInput(e.target.value)}
               id="linkInput"
             ></input>
-            {error && (
-              <p className={style.error}>
+
+            <p className={error ? style.displayError : style.hideError}>
+              <span className={style.error}>
                 The link you provided is not correct
-              </p>
-            )}
+              </span>
+            </p>
           </div>
-          <button type="submit">Log in</button>
+          <button
+            type="submit"
+            className={error ? style.buttonInvalidate : style.buttonValidate}
+          >
+            Log in
+          </button>
         </form>
       </div>
       <div className={style.right}>

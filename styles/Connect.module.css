@@ -42,8 +42,6 @@
 }
 
 .left form button {
-  background-color: var(--hover);
-  color: white;
   width: 200px;
   height: 50px;
   border: none;
@@ -52,6 +50,16 @@
   font-weight: bold;
   outline: none;
   cursor: pointer;
+}
+
+.buttonValidate {
+  background-color: var(--hover);
+  color: white;
+}
+.buttonInvalidate {
+  background-color: grey;
+  color: white;
+  cursor: default !important;
 }
 .right {
   width: 50%;
@@ -101,8 +109,13 @@
 .brandIcon:hover {
   transform: translateY(-5px);
 }
-
-.error {
+.displayError {
+  opacity: 1;
   text-align: center;
+}
+.hideError {
+  opacity: 0;
+}
+.error {
   color: var(--error);
 }
