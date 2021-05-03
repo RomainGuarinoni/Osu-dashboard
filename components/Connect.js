@@ -8,13 +8,12 @@ export default function Connect() {
   const [error, setError] = useState(false);
   function Connect(e) {
     e.preventDefault();
-    if (!error) {
-      console.log(link);
-    }
+    let userId = /^https:\/\/osu.ppy.sh\/users\/(.*)$/g.exec(link);
+    console.log(userId[1]);
   }
   function verifyLinkInput(value) {
     setLink(value);
-    const regex = /^https:\/\/osu.ppy.sh\/users\/[0-9]+/;
+    const regex = /^https:\/\/osu.ppy.sh\/users\/[0-9]+$/g;
     if (!regex.test(value) && value != "") {
       setError(true);
     } else {
@@ -48,6 +47,7 @@ export default function Connect() {
           <button
             type="submit"
             className={error ? style.buttonInvalidate : style.buttonValidate}
+            disabled={error}
           >
             Log in
           </button>
