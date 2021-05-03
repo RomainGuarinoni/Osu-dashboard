@@ -8,8 +8,19 @@ export default function Connect() {
   const [error, setError] = useState(false);
   function Connect(e) {
     e.preventDefault();
-    let userId = /^https:\/\/osu.ppy.sh\/users\/(.*)$/g.exec(link);
-    console.log(userId[1]);
+    if (link.length > 0) {
+      let userID = /^https:\/\/osu.ppy.sh\/users\/(.*)$/g.exec(link);
+
+      // set a cookie for the userID
+      var expires = new Date(Date.now() + 86400 * 1000).toUTCString();
+      document.cookie = `userID=${userID[1]}; expires=${expires}; path=/`;
+
+      //créer un cookie session 'code' pour savoir si c'est la première fois qu'on se connecte ou si on attends le code en retour
+      document.cookie = "code=true";
+
+      //envoyer sur la page de sou pour avoir le code
+      window.location.href = "http://localhost:5500"; //https://osu.ppy.sh/oauth/authorize?client_id=6885&redirect_uri=https://example.com&response_type=code&scope=public
+    }
   }
   function verifyLinkInput(value) {
     setLink(value);

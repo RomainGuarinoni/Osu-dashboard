@@ -3,6 +3,7 @@ import Head from "next/head";
 import HomeProfil from "../components/HomeProfil";
 import HomeDashboard from "../components/HomeDashboard";
 import Connect from "../components/Connect";
+import { useState, useEffect } from "react";
 export default function Home() {
   return (
     <div className={style.container}>
