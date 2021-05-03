@@ -1,0 +1,108 @@
+.container {
+  width: 1100px;
+  height: 600px;
+  background: var(--light-main);
+  border-radius: 20px;
+  border: none;
+  display: flex;
+  flex-wrap: wrap;
+}
+.left {
+  width: 50%;
+  height: 100%;
+  padding: 50px 0;
+}
+
+.left form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  color: white;
+  height: 100%;
+}
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+}
+.inputContainer label {
+  margin-left: 10px;
+  margin-bottom: 20px;
+}
+.inputContainer input {
+  border: none;
+  height: 45px;
+  background: var(--dark-main);
+  border-radius: 10px;
+  outline: none;
+  color: white;
+  padding: 20px;
+  font-size: 15px;
+}
+
+.left form button {
+  background-color: var(--hover);
+  color: white;
+  width: 200px;
+  height: 50px;
+  border: none;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  outline: none;
+  cursor: pointer;
+}
+.right {
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    144.62deg,
+    #39fbcc 0%,
+    rgba(0, 255, 194, 0.47) 100%
+  );
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.right h2,
+.right p,
+.right .link {
+  margin: 40px 0;
+}
+
+.right h2,
+.left h2 {
+  font-size: 40px;
+  letter-spacing: 2px;
+}
+.right p {
+  width: 70%;
+  text-align: center;
+  line-height: 30px;
+}
+
+.link {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  width: 80%;
+  font-size: 50px;
+}
+.brandIcon {
+  transition: transform ease 400ms;
+}
+.brandIcon:hover {
+  transform: translateY(-5px);
+}
+
+.error {
+  text-align: center;
+  color: var(--error);
+}

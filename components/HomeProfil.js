@@ -34,43 +34,6 @@ export default function HomeProfil() {
     },
   ];
 
-  const statItem = [
-    {
-      name: "Global rank",
-      icon: faTrophy,
-      svg: false,
-    },
-    {
-      name: "Country rank",
-      icon: faTrophy,
-      svg: false,
-    },
-    {
-      name: "level",
-      icon: faArrowUp,
-      svg: false,
-    },
-    {
-      name: "Accuracy",
-      icon: scope,
-      svg: true,
-    },
-    {
-      name: "Total PP",
-      icon: sigma, // a changer
-      svg: true,
-    },
-    {
-      name: "Max PP",
-      icon: faTrophy, // a changer
-      svg: true,
-    },
-    {
-      name: "Max combo",
-      icon: faTrophy, // a changer
-      svg: true,
-    },
-  ];
   return (
     <div className={style.container}>
       <div className={style.profilImgContainer}>
