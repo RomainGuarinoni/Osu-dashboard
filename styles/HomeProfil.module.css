@@ -1,0 +1,6 @@
+.container {
+  background-color: var(--dark-main);
+  position: fixed;
+  height: 100%;
+  width: 25%;
+}
