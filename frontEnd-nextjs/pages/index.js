@@ -4,6 +4,7 @@ import HomeProfil from "../components/HomeProfil";
 import HomeDashboard from "../components/HomeDashboard";
 import Connect from "../components/Connect";
 import Loader from "../components/Loader";
+import Error from "../components/Error";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
@@ -44,19 +45,19 @@ export default function Home({ OSU_API_SECRET }) {
         client_id: 6885,
         client_secret: OSU_API_SECRET,
         code: code,
-        redirect_uri: "https://example.com",
+        redirect_uri: "https://example.com", // a changer pour la prod
       },
-      
     })
       .then((res) => {
         console.log(res.data);
       })
       .catch((e) => {
-        console.log(`error in acios : ${e}`);
+        setError(true);
       });
   }
 
   const [userID, setUserID] = useState(false);
+  const [error, setError] = useState(false);
 
   //vérifier l'état des cookies code lorsque l'appli est monté
   useEffect(() => {
@@ -87,7 +88,9 @@ export default function Home({ OSU_API_SECRET }) {
         <HomeDashboard />
       </div>
       <div className={style.connectForm}>
-        {userID ? <Loader /> : <Connect />}
+        {userID && !error ? <Loader /> : null}
+        {!userID && !error ? <Connect /> : null}
+        {error ? <Error /> : null}
       </div>
     </div>
   );
