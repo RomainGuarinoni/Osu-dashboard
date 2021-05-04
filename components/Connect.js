@@ -39,10 +39,10 @@ export default function Connect() {
         <form onSubmit={Connect}>
           <h2>Login</h2>
           <div className={style.inputContainer}>
-            <label for="linkInput">Enter your osu! profil link</label>
+            <label htmlFor="linkInput">Enter your osu! profil link</label>
             <input
               type="txt"
-              classe={style.linkInput}
+              className={style.linkInput}
               name="linkInput"
               value={link}
               onChange={(e) => verifyLinkInput(e.target.value)}
