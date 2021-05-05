@@ -3,9 +3,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { faGlobeAmericas } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
-export default function Connect() {
+export default function Connect({ error, setError }) {
   const [link, setLink] = useState("");
-  const [error, setError] = useState(false);
+  const [errorInput, setErrorInput] = useState(false);
   function Connect(e) {
     e.preventDefault();
     if (link.length > 0) {
@@ -16,20 +16,25 @@ export default function Connect() {
       document.cookie = `userID=${userID[1]}; expires=${expires}; path=/`;
 
       //créer un cookie session 'code' pour savoir si c'est la première fois qu'on se connecte ou si on attends le code en retour
-      document.cookie = "code=true";
+      document.cookie = "code=true;";
 
       //envoyer sur la page de sou pour avoir le code
-      window.location.href = "http://localhost:5500"; //https://osu.ppy.sh/oauth/authorize?client_id=6885&redirect_uri=https://example.com&response_type=code&scope=public
+      try {
+        window.location.href = "http://localhost:5500"; //https://osu.ppy.sh/oauth/authorize?client_id=6885&redirect_uri=https://example.com&response_type=code&scope=public
+      } catch (err) {
+        setError(true);
+        document.cookie = "code=false;";
+      }
     }
   }
   function verifyLinkInput(value) {
     setLink(value);
     const regex = /^https:\/\/osu.ppy.sh\/users\/[0-9]+$/g;
     if (!regex.test(value) && value != "") {
-      setError(true);
+      setErrorInput(true);
     } else {
       if (error) {
-        setError(false);
+        setErrorInput(false);
       }
     }
   }
@@ -49,7 +54,7 @@ export default function Connect() {
               id="linkInput"
             ></input>
 
-            <p className={error ? style.displayError : style.hideError}>
+            <p className={errorInput ? style.displayError : style.hideError}>
               <span className={style.error}>
                 The link you provided is not correct
               </span>
@@ -57,7 +62,9 @@ export default function Connect() {
           </div>
           <button
             type="submit"
-            className={error ? style.buttonInvalidate : style.buttonValidate}
+            className={
+              errorInput ? style.buttonInvalidate : style.buttonValidate
+            }
             disabled={error}
           >
             Log in
