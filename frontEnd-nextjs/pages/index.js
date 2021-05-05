@@ -90,7 +90,14 @@ export default function Home({ OSU_API_SECRET }) {
       <div className={style.connectForm}>
         {userID && !error ? <Loader /> : null}
         {!userID && !error ? <Connect /> : null}
-        {error ? <Error /> : null}
+        {error ? (
+          <Error
+            error={error}
+            setError={setError}
+            userID={userID}
+            setUserID={setUserID}
+          />
+        ) : null}
       </div>
     </div>
   );
