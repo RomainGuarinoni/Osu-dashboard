@@ -49,9 +49,9 @@ app.post("/getAccessToken", (req, res, next) => {
     });
 });
 
-app.get("/getUser", (req, res, next) => {
-  const user = req.body.user;
-  const token = req.body.token;
+app.get("/getUser/:userID/:token", (req, res, next) => {
+  const user = req.params.userID;
+  const token = req.params.token;
 
   axios({
     url: `https://osu.ppy.sh/api/v2/users/${user}`,
@@ -67,9 +67,9 @@ app.get("/getUser", (req, res, next) => {
     });
 });
 
-app.get("/test", (req, res, next) => {
+app.get("/test/:userID", (req, res, next) => {
   setTimeout(() => {
-    res.status(200).json("bonjour");
+    res.status(200).json(req.params.userID);
   }, 1000);
 });
 

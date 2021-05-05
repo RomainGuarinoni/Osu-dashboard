@@ -1,0 +1,22 @@
+.container {
+  width: 100%;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 30px 0;
+}
+
+.img {
+  width: 150px;
+  height: 150px;
+  border: none;
+  border-radius: 100%;
+  position: relative;
+  overflow: hidden;
+}
+.container h2 {
+  margin: 30px 0 0 0;
+  padding: 0;
+}

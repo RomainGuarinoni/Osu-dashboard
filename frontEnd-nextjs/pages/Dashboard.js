@@ -1,20 +1,15 @@
-import axios from "axios";
-import useSWR from "swr";
+import style from "../styles/Dashboard.module.css";
+import Head from "next/head";
+import Profil from "../components/Profil";
+import GraphContainer from "../components/GraphContainer";
 export default function Dashboard() {
-  const fetcher = (...args) => axios(...args).then((res) => res.data);
-
-  const { data, error } = useSWR("http://localhost:5000/test", fetcher);
-  if (error)
-    return (
-      <div>
-        <p>failed to load</p>
-      </div>
-    );
-  if (!data)
-    return (
-      <div>
-        <p>wait ...</p>
-      </div>
-    );
-  return <div>{data} </div>;
+  return (
+    <div className={style.container}>
+      <Head>
+        <title>Osu Dashboard</title>
+      </Head>
+      <Profil />
+      <GraphContainer />
+    </div>
+  );
 }
