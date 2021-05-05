@@ -50,9 +50,15 @@ app.post("/getAccessToken", (req, res, next) => {
 });
 
 app.get("/getUser/:userID/:token", (req, res, next) => {
+  console.log("pass there");
   const user = req.params.userID;
   const token = req.params.token;
-
+  console.log("----------------------------------");
+  console.log(user);
+  console.log("----------------------------------");
+  console.log(token);
+  console.log("----------------------------------");
+  let responseObject = new Object();
   axios({
     url: `https://osu.ppy.sh/api/v2/users/${user}`,
     method: "get",
@@ -60,17 +66,36 @@ app.get("/getUser/:userID/:token", (req, res, next) => {
       Authorization: `Bearer ${token}`,
     },
   })
-    .then((response) => res.status(200).json(response.data))
+    .then((response) => {
+      responseObject = response.data;
+      return axios({
+        url: `https://osu.ppy.sh/api/v2/users/${user}/scores/best`,
+        method: "get",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+    })
     .catch((err) => {
-      console.log(`error : ${err}`);
+      console.log(`error 1  : ${err}`);
+      res.status(400).json("an error has occured");
+    })
+    .then((response) => {
+      responseObject["bestMapScore"] = response.data[0].pp;
+      console.log(responseObject);
+      res.status(200).json(JSON.stringify(responseObject));
+    })
+    .catch((err) => {
+      console.log(`error 2  : ${err}`);
       res.status(400).json("an error has occured");
     });
-});
 
-app.get("/test/:userID", (req, res, next) => {
-  setTimeout(() => {
-    res.status(200).json(req.params.userID);
-  }, 1000);
+  /*setTimeout(() => {
+    responseObject = {
+      test: "ca a marché",
+    };
+    res.status(200).json(JSON.stringify(responseObject));
+  }, 1000);*/
 });
 
 if (process.env.NODE_ENV === "production") {

@@ -1,0 +1,15 @@
+.statisticsTitle {
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  margin: 40px 0;
+}
+.statisticsTitle span {
+  font-size: 25px;
+}
+.statisticsTitle span,
+.statisticsTitle h2 {
+  margin: 0 10px;
+  color: white;
+}

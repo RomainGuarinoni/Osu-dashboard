@@ -1,4 +1,4 @@
-.container {
+.containerRank {
   border: 2px solid white;
   text-align: center;
   width: 60px;
@@ -6,7 +6,15 @@
   border-radius: 10px;
   margin: 10px 0;
 }
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .container p {
   margin: 0;
   padding: 0;
+}
+.data {
+  color: white;
 }
