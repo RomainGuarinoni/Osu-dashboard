@@ -33,9 +33,7 @@ export default function Connect({ error, setError }) {
     if (!regex.test(value) && value != "") {
       setErrorInput(true);
     } else {
-      if (error) {
-        setErrorInput(false);
-      }
+      setErrorInput(false);
     }
   }
   return (

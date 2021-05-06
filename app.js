@@ -84,13 +84,71 @@ app.get("/getUser/:userID/:token", (req, res, next) => {
       console.log(`error 2  : ${err}`);
       res.status(400).json("an error has occured");
     });
+});
 
-  /*setTimeout(() => {
-    responseObject = {
-      test: "ca a marché",
-    };
-    res.status(200).json(JSON.stringify(responseObject));
-  }, 1000);*/
+app.get("/getGraph/:userID/:token", (req, res, next) => {
+  const user = req.params.userID;
+  const token = req.params.token;
+  let objectResponse = new Object();
+  axios({
+    url: `https://osu.ppy.sh/api/v2/users/${user}`,
+    method: "get",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((response) => {
+      objectResponse["rankEvolution"] = response.data.rankHistory.data;
+      return axios({
+        url: `https://osu.ppy.sh/api/v2/users/${user}/scores/recent`,
+        method: "get",
+        params: {
+          limit: 50,
+          include_fails: 1,
+        },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+    })
+    .catch((err) => {
+      console.log(`error 1 : ${err}`);
+      res.status(400).json("there was an error");
+    })
+    .then((response) => {
+      let recentAccuracy = new Array();
+      let recentMod = {
+        normal: 0,
+        EZ: 0,
+        NF: 0,
+        HT: 0,
+        HR: 0,
+        SD: 0,
+        PF: 0,
+        NC: 0,
+        FL: 0,
+      };
+      let recentDifficulty = new Array();
+      response.data.forEach((element) => {
+        recentAccuracy.push(element.accuracy);
+        recentDifficulty.push(element.beatmap.difficulty_rating);
+        if (element.mods.length == 0) {
+          recentMod.normal++;
+        } else {
+          element.mods.forEach((mod) => {
+            recentMod[mod]++;
+          });
+        }
+      });
+      objectResponse["recentAccuracy"] = recentAccuracy;
+      objectResponse["recentMod"] = recentMod;
+      objectResponse["recentDifficulty"] = recentDifficulty;
+      res.status(200).json(objectResponse);
+    })
+    .catch((err) => {
+      res.status(200).json("there is an error");
+      console.log(`error 2 :${err}`);
+    });
 });
 
 if (process.env.NODE_ENV === "production") {

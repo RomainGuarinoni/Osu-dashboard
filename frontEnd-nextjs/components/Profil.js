@@ -12,9 +12,6 @@ export default function Profil() {
   const router = useRouter();
   const userID = getUrlParam("userID");
   const token = getUrlParam("token");
-  console.log(userID);
-  console.log(token);
-  console.log(`http://localhost:5000/getUser/${userID}/${token}`);
   function sortMapRank(object) {
     let objectAux = {
       ssh: object.ss,
