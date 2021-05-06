@@ -53,11 +53,6 @@ app.get("/getUser/:userID/:token", (req, res, next) => {
   console.log("pass there");
   const user = req.params.userID;
   const token = req.params.token;
-  console.log("----------------------------------");
-  console.log(user);
-  console.log("----------------------------------");
-  console.log(token);
-  console.log("----------------------------------");
   let responseObject = new Object();
   axios({
     url: `https://osu.ppy.sh/api/v2/users/${user}`,
@@ -82,7 +77,7 @@ app.get("/getUser/:userID/:token", (req, res, next) => {
     })
     .then((response) => {
       responseObject["bestMapScore"] = response.data[0].pp;
-      console.log(responseObject);
+      console.log("render with succes");
       res.status(200).json(JSON.stringify(responseObject));
     })
     .catch((err) => {

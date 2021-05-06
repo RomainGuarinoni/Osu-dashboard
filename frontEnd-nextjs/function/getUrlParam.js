@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 export function getUrlParam(param) {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);

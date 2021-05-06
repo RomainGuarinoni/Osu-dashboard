@@ -1,0 +1,17 @@
+.container {
+  width: 100%;
+}
+.nav {
+  width: 100%;
+  color: white;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 22px;
+  cursor: pointer;
+  transition: color ease 200ms;
+}
+.nav:hover {
+  color: var(--hover);
+}

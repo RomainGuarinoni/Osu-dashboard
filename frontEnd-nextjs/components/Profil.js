@@ -7,6 +7,7 @@ import useSWR from "swr";
 import MapRank from "../components/MapRank";
 import GlobalStatistics from "../components/GlobalStatistics";
 import { useRouter } from "next/router";
+import Navigation from "../components/Navigation";
 export default function Profil() {
   const router = useRouter();
   const userID = getUrlParam("userID");
@@ -68,6 +69,7 @@ export default function Profil() {
         maxPP={finalData.bestMapScore}
         maxCombo={finalData.statistics.maximum_combo}
       />
+      <Navigation />
     </div>
   );
 }

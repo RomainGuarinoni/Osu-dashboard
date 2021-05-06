@@ -37,7 +37,7 @@ export default function GlobalStatistics({
     {
       img: "scope",
       name: "Accuracy",
-      data: accuracy,
+      data: `${accuracy.toFixed(2)} %`,
       svg: true,
     },
     {
