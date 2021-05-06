@@ -7,8 +7,6 @@ import {
   faUserAlt,
   faArrowUp,
 } from "@fortawesome/free-solid-svg-icons";
-import sigma from "../assets/sigma.svg";
-import scope from "../assets/scope.svg";
 import MapRank from "./MapRank";
 export default function HomeProfil() {
   const mapRank = [

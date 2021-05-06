@@ -64,33 +64,10 @@ export default function Profil() {
         countryRank={finalData.statistics.country_rank}
         level={finalData.statistics.level.current}
         accuracy={finalData.statistics.hit_accuracy}
-        totalPP={finalData.statistics.PP}
+        totalPP={finalData.statistics.pp}
         maxPP={finalData.bestMapScore}
         maxCombo={finalData.statistics.maximum_combo}
       />
     </div>
   );
-  /*
-  <ProfilPicture avatar_url={data.avatar_url} username={data.username} />
-  <div className={style.mapRank}>
-        {Object.keys(sortMapRank(data.statistics.grade_counts)).map(
-          (element, index) => (
-            <MapRank
-              key={`${element}-${index}`}
-              name={element.toUpperCase()}
-              color={"white"}
-              data={data.statistics.grade_counts[element]}
-            />
-          )
-        )}
-      </div>
-      <GlobalStatistics
-        globalRank={data.statistics.global_rank}
-        countryRank={data.statistics.country_rank}
-        level={data.statistics.level.current}
-        accuracy={data.statistics.hit_accuracy}
-        totalPP={data.statistics.PP}
-        maxPP={data.bestMapScore}
-        maxCombo={data.statistics.maximum_combo}
-      /> */
 }
