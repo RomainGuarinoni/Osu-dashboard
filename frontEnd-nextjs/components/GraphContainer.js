@@ -3,7 +3,7 @@ import useSWR from "swr";
 import { fetcher } from "../function/fetcher";
 import { getUrlParam } from "../function/getUrlParam";
 import Loader from "../components/Loader";
-
+import RecentAccuracy from "../components/RecentAccuracy";
 export default function GraphContainer() {
   const { data, error } = useSWR(
     `http://localhost:5000/getGraph/${getUrlParam("userID")}/${getUrlParam(
@@ -19,9 +19,14 @@ export default function GraphContainer() {
         <Loader />
       </div>
     );
+  console.log(data.recentAccuracy);
   return (
     <div className={style.container}>
-      <h1>coucou</h1>
+      <RecentAccuracy
+        dataValue={data.recentAccuracy}
+        labelsValue={data.labels}
+        widht
+      />
     </div>
   );
 }

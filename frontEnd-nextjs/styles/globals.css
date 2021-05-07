@@ -30,7 +30,7 @@ a {
   width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: var(--light-main);
 }
 
 ::-webkit-scrollbar-thumb {

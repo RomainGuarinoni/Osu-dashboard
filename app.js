@@ -129,9 +129,13 @@ app.get("/getGraph/:userID/:token", (req, res, next) => {
         FL: 0,
       };
       let recentDifficulty = new Array();
+      let labels = new Array();
       response.data.forEach((element) => {
         recentAccuracy.push(element.accuracy);
         recentDifficulty.push(element.beatmap.difficulty_rating);
+        let date = new Date(element.created_at);
+        labels.push(`${date.getDay()} - ${date.getMonth()}`);
+        labels.push();
         if (element.mods.length == 0) {
           recentMod.normal++;
         } else {
@@ -140,9 +144,10 @@ app.get("/getGraph/:userID/:token", (req, res, next) => {
           });
         }
       });
-      objectResponse["recentAccuracy"] = recentAccuracy;
+      objectResponse["recentAccuracy"] = recentAccuracy.reverse();
       objectResponse["recentMod"] = recentMod;
-      objectResponse["recentDifficulty"] = recentDifficulty;
+      objectResponse["recentDifficulty"] = recentDifficulty.reverse();
+      objectResponse["labels"] = labels.reverse();
       res.status(200).json(objectResponse);
     })
     .catch((err) => {
