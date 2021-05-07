@@ -21,9 +21,10 @@ export default function ContactForm() {
       </div>
       <form className={style.form} onSubmit={(e) => submit(e)}>
         <h2>Contact us !</h2>
-        <div class={style.inputBox}>
+        <div className={style.inputBox}>
           <label htmlFor="nameInput"> Name</label>
           <input
+            required
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -31,9 +32,10 @@ export default function ContactForm() {
             id="nameInput"
           />
         </div>
-        <div class={style.inputBox}>
+        <div className={style.inputBox}>
           <label htmlFor="emailInput"> Email</label>
           <input
+            required
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -41,9 +43,10 @@ export default function ContactForm() {
             id="emailInput"
           />
         </div>
-        <div class={style.inputBox}>
+        <div className={style.inputBox}>
           <label htmlFor="msgInput"> Message</label>
           <textarea
+            required
             type="text"
             value={msg}
             onChange={(e) => setMsg(e.target.value)}

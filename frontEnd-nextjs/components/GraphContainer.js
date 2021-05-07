@@ -4,6 +4,7 @@ import { fetcher } from "../function/fetcher";
 import { getUrlParam } from "../function/getUrlParam";
 import Loader from "../components/Loader";
 import RecentAccuracy from "../components/RecentAccuracy";
+import RecentDifficulty from "../components/RecentDifficulty";
 export default function GraphContainer() {
   const { data, error } = useSWR(
     `http://localhost:5000/getGraph/${getUrlParam("userID")}/${getUrlParam(
@@ -25,7 +26,10 @@ export default function GraphContainer() {
       <RecentAccuracy
         dataValue={data.recentAccuracy}
         labelsValue={data.labels}
-        widht
+      />
+      <RecentDifficulty
+        dataValue={data.recentDifficulty}
+        labelsValue={data.labels}
       />
     </div>
   );
