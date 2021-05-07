@@ -62,13 +62,13 @@ export default function Home({ OSU_API_SECRET }) {
         const code = getUrlParam("code");
         console.log(code);
         const codeAux =
-          "def50200bff00111a6e4df77928cc95954720493fae0d08ed9610c30470572dcbfea637d0aa9fc4c83e12abd41a36595afff74d724547a10c3e7cc949f837af090ea1bd6f47745159c25718875deccb2e1a365fbd38f263ed2a94135faf40df2f56ef3b32b07324643c2081617bcc171a0a6421a6d3b0cd308dcee9a4de294e33f650cbf2eff45d5ef182f49a7e4e2989e3628a9c5c5d0c6683f40e2ed907b1cb5562e168bdb6b852c3eac6c03c3d26ad231a551e6528fb80fff95db58a7ade49f28cce880d5632a7da67e9e148c7a6646daebf4107844a3616492927928960f555d60a7f69bc4537deb43d83c95d1440a4bd8032738fa799e38921c2292445d1bfd02d458e8d44316168ebdcd8931bb0359e318c7437ac215ca3794c93882c7fafc6e8dabeeffca1e4ea72290426b0ebb6216acab70e29000dc789cda90a62d05316161fb5d9308a7232fc93c604cb916b69c6dfcddd2800797133c4299cbf0b916287acb6dda18ede7bbf4f05335";
+          "def502009abbd291fdf0fa5e33f68ce68bc677712f3aa83a4693101b131f17d3646c4edc29597a4b65da78bf74c07ad6b1c6a7194d9950be8424110e2ba0d9346ddc4c59554852044b13255472fc054f274a970e717ebbe104c47bd65c29e01fb57d75da41636036fbbb206cf57c75ce2d6290e1ba9021af55943032eaeab5957369bde0ebeb9956a77bd0224e34da7f63fc4c57d4820fc738046552ea9d7228ca074c3bee858f1b8f362abf02e061184d342cc167f50183b4ae443eb24fd30f8fd35871cb02bd32aab27e48ff560c94936bf6d52a7f321ddfed2c700ce7e43e2f145493014b9eab9e2bc5481eb985a7b22296ccea0631340bf7267c3bde042f0a2c12fa1169ad27cccc8ec4a523de128ea791b729bc6eb6653ec54e8c30d2eb5f707527522af3723056935eb479c1b187b1bd59a2b5de677c36f504e0d12876a25d6bd63f70d2cb98d9518172446b914f5d733fa31ee58933d78ad05a98d49aedf91cb7d66fa36415134813726b91";
         getToken(codeAux);
       } else {
         //créer le cookie de redirection
         document.cookie = "code=true;";
         try {
-          window.location.href = `http://localhost:5501`; //https://osu.ppy.sh/oauth/authorize?client_id=6885&redirect_uri=https://example.com&response_type=code&scope=public
+          window.location.href = `http://localhost:5500`; //https://osu.ppy.sh/oauth/authorize?client_id=6885&redirect_uri=https://example.com&response_type=code&scope=public
         } catch (err) {
           setError(true);
           document.cookie = "code=false;";

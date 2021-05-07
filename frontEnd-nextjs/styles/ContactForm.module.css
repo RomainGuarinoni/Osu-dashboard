@@ -3,4 +3,93 @@
   color: white;
   text-align: center;
   flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+}
+.header h1 {
+  margin: 25px 40px;
+  letter-spacing: 2px;
+}
+
+.form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.form h2 {
+  color: var(--hover);
+  font-size: 35px;
+}
+
+.inputBox {
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: 1000px;
+  width: 75%;
+}
+
+.inputBox label {
+  font-weight: bold;
+  font-size: 25px;
+  margin: 8px 0;
+}
+.inputSmall,
+.inputLarge {
+  width: 100%;
+  height: 50px;
+  border: none;
+  border-radius: 15px;
+  background: var(--dark-main);
+  padding: 10px;
+  color: white;
+  outline: none;
+  font-size: 20px;
+}
+
+.inputLarge {
+  height: 300px !important;
+}
+.button {
+  text-align: center;
+  background-color: var(--hover);
+  border: none;
+  border-radius: 15px;
+  width: 200px;
+  height: 50px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  cursor: pointer;
+}
+.footer {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.brandIcon {
+  font-size: 25px;
+  color: white;
+  margin: 10px 20px 10px;
+  cursor: pointer;
+  transition: all ease 200ms;
+}
+.brandIcon:hover {
+  color: var(--hover);
 }

@@ -20,7 +20,7 @@ export default function Connect({ error, setError }) {
 
       //envoyer sur la page de sou pour avoir le code
       try {
-        window.location.href = "http://localhost:5501"; //https://osu.ppy.sh/oauth/authorize?client_id=6885&redirect_uri=https://example.com&response_type=code&scope=public
+        window.location.href = "http://localhost:5500"; //https://osu.ppy.sh/oauth/authorize?client_id=6885&redirect_uri=https://example.com&response_type=code&scope=public
       } catch (err) {
         setError(true);
         document.cookie = "code=false;";
