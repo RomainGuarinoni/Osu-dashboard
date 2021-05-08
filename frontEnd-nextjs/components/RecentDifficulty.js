@@ -1,5 +1,5 @@
 import { Line } from "react-chartjs-2";
-import style from "../styles/RecentDifficulty.module.css";
+import GraphLayout from "../components/GraphLayout";
 import { useEffect } from "react";
 import React from "react";
 export default function RecentAccuracy({ dataValue, labelsValue }) {
@@ -75,9 +75,9 @@ export default function RecentAccuracy({ dataValue, labelsValue }) {
   };
 
   return (
-    <div className={style.container}>
+    <GraphLayout>
       <p>Recent Difficulty evolution</p>
       <Line data={data} options={options} />
-    </div>
+    </GraphLayout>
   );
 }

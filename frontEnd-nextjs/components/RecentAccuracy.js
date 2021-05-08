@@ -1,7 +1,7 @@
 import { Line } from "react-chartjs-2";
-import style from "../styles/RecentAccuracy.module.css";
 import { useEffect } from "react";
 import React from "react";
+import GraphLayout from "../components/GraphLayout";
 export default function RecentAccuracy({ dataValue, labelsValue }) {
   console.log(dataValue);
   const data = {
@@ -76,9 +76,9 @@ export default function RecentAccuracy({ dataValue, labelsValue }) {
   };
 
   return (
-    <div className={style.container}>
+    <GraphLayout>
       <p>Recent accuracy evolution</p>
       <Line data={data} options={options} />
-    </div>
+    </GraphLayout>
   );
 }
