@@ -2,7 +2,15 @@ import GraphLayout from "./GraphLayout";
 import { Line } from "react-chartjs-2";
 export default function RankEvolution({ dataValue }) {
   let labelsValue = new Array();
-  dataValue.forEach(() => labelsValue.push("test"));
+  let date = 90;
+  dataValue.forEach((item, index) => {
+    console.log(index);
+    if (date - index == 1) {
+      labelsValue.push(`now`);
+    } else {
+      labelsValue.push(`${date - (index + 1)} days ago`);
+    }
+  });
   const data = {
     labels: labelsValue,
     datasets: [
