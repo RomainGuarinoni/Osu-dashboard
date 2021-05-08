@@ -1,27 +1,27 @@
-import { Line } from "react-chartjs-2";
-import { useEffect } from "react";
-import React from "react";
 import GraphLayout from "./GraphLayout";
-export default function RecentAccuracy({ dataValue, labelsValue }) {
+import { Line } from "react-chartjs-2";
+export default function RankEvolution({ dataValue }) {
+  let labelsValue = new Array();
+  dataValue.forEach(() => labelsValue.push("test"));
   const data = {
     labels: labelsValue,
     datasets: [
       {
-        label: "Accuracy",
+        label: "Rank",
         fill: false,
         lineTension: 0.1,
-        backgroundColor: "#40C4B2",
-        borderColor: "#40C4B2",
+        backgroundColor: "#ff9f40",
+        borderColor: "#ff9f40",
         borderCapStyle: "butt",
         borderDash: [],
         borderDashOffset: 0.0,
         borderJoinStyle: "miter",
-        pointBorderColor: "rgba(75,192,192,1)",
-        pointBackgroundColor: "#fff",
+        pointBorderColor: "#ff9f40",
+        pointBackgroundColor: "#ff9f40",
         pointBorderWidth: 1,
         pointHoverRadius: 5,
-        pointHoverBackgroundColor: "rgba(75,192,192,1)",
-        pointHoverBorderColor: "rgba(220,220,220,1)",
+        pointHoverBackgroundColor: "#ff9f40",
+        pointHoverBorderColor: "#ff9f40",
         pointHoverBorderWidth: 2,
         pointRadius: 1,
         pointHitRadius: 10,
@@ -39,6 +39,7 @@ export default function RecentAccuracy({ dataValue, labelsValue }) {
           color: "rgba(255, 255, 255, 0.5)",
           padding: 0,
         },
+
         grid: {
           color: "rgba(255,255,255,0.2)",
           display: false,
@@ -48,17 +49,20 @@ export default function RecentAccuracy({ dataValue, labelsValue }) {
           text: "test ",
           color: "white",
         },
-        max: 1,
+        reverse: true,
       },
       xAxis: {
         ticks: {
+          reverse: true,
           backdropColor: "rgba(255, 255, 255, 1)",
           color: "rgba(255, 255, 255, 0.5)",
+          display: false,
         },
         grid: {
           color: "rgba(255,255,255,0.2)",
           display: false,
         },
+        display: false,
       },
     },
     plugins: {
@@ -76,7 +80,7 @@ export default function RecentAccuracy({ dataValue, labelsValue }) {
 
   return (
     <GraphLayout>
-      <p>Recent accuracy evolution</p>
+      <p>Rank evolution</p>
       <Line data={data} options={options} />
     </GraphLayout>
   );

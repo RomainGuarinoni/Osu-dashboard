@@ -1,5 +1,5 @@
 import { Line } from "react-chartjs-2";
-import GraphLayout from "../components/GraphLayout";
+import GraphLayout from "./GraphLayout";
 import { useEffect } from "react";
 import React from "react";
 export default function RecentAccuracy({ dataValue, labelsValue }) {
@@ -8,7 +8,7 @@ export default function RecentAccuracy({ dataValue, labelsValue }) {
     labels: labelsValue,
     datasets: [
       {
-        label: "Accuracy",
+        label: "Difficulty",
         fill: false,
         lineTension: 0.1,
         backgroundColor: "#ff6384",

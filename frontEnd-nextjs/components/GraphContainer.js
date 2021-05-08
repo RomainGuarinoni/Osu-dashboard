@@ -2,9 +2,11 @@ import style from "../styles/GraphContainer.module.css";
 import useSWR from "swr";
 import { fetcher } from "../function/fetcher";
 import { getUrlParam } from "../function/getUrlParam";
-import Loader from "../components/Loader";
-import RecentAccuracy from "../components/RecentAccuracy";
-import RecentDifficulty from "../components/RecentDifficulty";
+import Loader from "./Loader";
+import RecentAccuracy from "./RecentAccuracy";
+import RecentDifficulty from "./RecentDifficulty";
+import rankEvolution from "./RankEvolution";
+import RankEvolution from "./RankEvolution";
 export default function GraphContainer() {
   const { data, error } = useSWR(
     `http://localhost:5000/getGraph/${getUrlParam("userID")}/${getUrlParam(
@@ -31,6 +33,7 @@ export default function GraphContainer() {
         dataValue={data.recentDifficulty}
         labelsValue={data.labels}
       />
+      <RankEvolution dataValue={data.rankEvolution} />
     </div>
   );
 }
