@@ -5,5 +5,19 @@
   right: 0;
   bottom: 0;
   display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
   overflow: hidden;
+}
+.dashboardContainer {
+  display: flex;
+  position: relative;
+  z-index: 1;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.error {
+  position: absolute;
+  z-index: 2;
 }
