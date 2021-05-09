@@ -1,5 +1,6 @@
 const axios = require("axios");
 exports.getGraphData = (req, res, next) => {
+  console.log("yeah");
   const user = req.params.userID;
   const token = req.params.token;
   let objectResponse = new Object();

@@ -7,6 +7,7 @@ const tokenRoutes = require("./routes/tokenRoutes");
 const userRoutes = require("./routes/userRoutes");
 const graphRoutes = require("./routes/graphRoutes");
 //app.use(bodyParser.json())
+console.log("new request");
 app.use(express.json());
 app.use(cors());
 app.use((req, res, next) => {
@@ -26,7 +27,7 @@ app.use("/getAccessToken", tokenRoutes);
 
 app.use("/getUser", userRoutes);
 
-app.use("getGraph/", graphRoutes);
+app.use("/getGraph", graphRoutes);
 
 if (process.env.NODE_ENV === "production") {
   // Static folder

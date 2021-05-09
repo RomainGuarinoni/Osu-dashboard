@@ -1,6 +1,5 @@
 const axios = require("axios");
 exports.getUserInfo = (req, res, next) => {
-  console.log("pass there");
   const user = req.params.userID;
   const token = req.params.token;
   let responseObject = new Object();
@@ -27,7 +26,6 @@ exports.getUserInfo = (req, res, next) => {
     })
     .then((response) => {
       responseObject["bestMapScore"] = response.data[0].pp;
-      console.log("render with succes");
       res.status(200).json(JSON.stringify(responseObject));
     })
     .catch((err) => {
