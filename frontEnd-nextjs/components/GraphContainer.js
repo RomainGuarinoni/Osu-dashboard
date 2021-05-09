@@ -23,7 +23,28 @@ export default function GraphContainer() {
   if (!data)
     return (
       <div className={style.container}>
-        <Loader />
+        <header className={style.header}>
+          <h1 className={style.title}>OSU DASHBOARD</h1>
+        </header>
+        <div className={style.containerGraph}>
+          <div className={style.loader}>
+            <Loader />
+          </div>
+        </div>
+        <footer className={style.footer}>
+          <a
+            href="https://github.com/RomainGuarinoni/Osu-dashboard"
+            target="__blank"
+          >
+            <FontAwesomeIcon className={style.brandIcon} icon={faGithub} />
+          </a>
+          <a href="https://osu.ppy.sh/home" target="__blank">
+            <FontAwesomeIcon
+              className={style.brandIcon}
+              icon={faGlobeAmericas}
+            />
+          </a>
+        </footer>
       </div>
     );
   console.log(data.recentAccuracy);
@@ -33,17 +54,22 @@ export default function GraphContainer() {
         <h1 className={style.title}>OSU DASHBOARD</h1>
       </header>
       <div className={style.containerGraph}>
-        <RecentAccuracy
-          dataValue={data.recentAccuracy}
-          labelsValue={data.labels}
-        />
-        <RecentDifficulty
-          dataValue={data.recentDifficulty}
-          labelsValue={data.labels}
-        />
-        <RankEvolution dataValue={data.rankEvolution} />
-        <RecentMod dataValue={data.recentMod} />
-        <TopPlaces dataValue={data.topPlaces} />
+        <div className={style.graphLeft}>
+          <RecentAccuracy
+            dataValue={data.recentAccuracy}
+            labelsValue={data.labels}
+          />
+          <RankEvolution dataValue={data.rankEvolution} />
+          <TopPlaces dataValue={data.topPlaces} />
+        </div>
+        <div className={style.graphRight}>
+          <RecentDifficulty
+            dataValue={data.recentDifficulty}
+            labelsValue={data.labels}
+          />
+
+          <RecentMod dataValue={data.recentMod} />
+        </div>
       </div>
       <footer className={style.footer}>
         <a
