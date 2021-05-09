@@ -7,6 +7,7 @@ import RecentAccuracy from "./RecentAccuracy";
 import RecentDifficulty from "./RecentDifficulty";
 import RankEvolution from "./RankEvolution";
 import RecentMod from "./RecentMod";
+import TopPlaces from "./TopPlaces";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { faGlobeAmericas } from "@fortawesome/free-solid-svg-icons";
@@ -42,6 +43,7 @@ export default function GraphContainer() {
         />
         <RankEvolution dataValue={data.rankEvolution} />
         <RecentMod dataValue={data.recentMod} />
+        <TopPlaces dataValue={data.topPlaces} />
       </div>
       <footer className={style.footer}>
         <a

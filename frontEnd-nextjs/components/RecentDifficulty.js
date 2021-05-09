@@ -1,7 +1,5 @@
 import { Line } from "react-chartjs-2";
 import GraphLayout from "./GraphLayout";
-import { useEffect } from "react";
-import React from "react";
 export default function RecentAccuracy({ dataValue, labelsValue }) {
   console.log(dataValue);
   const data = {

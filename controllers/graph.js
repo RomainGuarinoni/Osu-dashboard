@@ -1,6 +1,5 @@
 const axios = require("axios");
 exports.getGraphData = (req, res, next) => {
-  console.log("yeah");
   const user = req.params.userID;
   const token = req.params.token;
   let objectResponse = new Object();
@@ -64,7 +63,6 @@ exports.getGraphData = (req, res, next) => {
       objectResponse["recentMod"] = recentMod;
       objectResponse["recentDifficulty"] = recentDifficulty.reverse();
       objectResponse["labels"] = labels.reverse();
-      console.log(recentMod);
       return axios({
         url: `https://osu.ppy.sh/api/v2/users/${user}/recent_activity`,
         method: "get",
