@@ -4,7 +4,6 @@ export default function RankEvolution({ dataValue }) {
   let labelsValue = new Array();
   let date = 90;
   dataValue.forEach((item, index) => {
-    console.log(index);
     if (date - index == 1) {
       labelsValue.push(`now`);
     } else {

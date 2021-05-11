@@ -1,7 +1,6 @@
 import { Line } from "react-chartjs-2";
 import GraphLayout from "./GraphLayout";
 export default function RecentAccuracy({ dataValue, labelsValue }) {
-  console.log(dataValue);
   const data = {
     labels: labelsValue,
     datasets: [

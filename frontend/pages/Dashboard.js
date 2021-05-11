@@ -6,17 +6,25 @@ import Error from "../components/Error";
 import { useState } from "react";
 export default function Dashboard() {
   const [error, setError] = useState(false);
-
+  console.log(`error : ${error}`);
   return (
     <div className={style.container}>
       <Head>
         <title>Osu Dashboard</title>
       </Head>
-      <div className={style.dashboardContainer}>
+      <div
+        className={style.container}
+        style={error ? { filter: "brightness(40%)" } : {}}
+      >
         <Profil setErrorSWR={setError} />
         <GraphContainer setErrorSWR={setError} />
       </div>
-      {error && <Error className={style.error} />}
+      {error && (
+        <div className={style.error}>
+          {" "}
+          <Error returnHome={true} />
+        </div>
+      )}
     </div>
   );
 }

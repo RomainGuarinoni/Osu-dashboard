@@ -20,6 +20,7 @@ export default function GraphContainer({ setErrorSWR }) {
   );
 
   if (error) {
+    console.log("there was an error there");
     setErrorSWR(true);
     return <div className={style.container}></div>;
   }
@@ -50,7 +51,6 @@ export default function GraphContainer({ setErrorSWR }) {
         </footer>
       </div>
     );
-  console.log(data.recentAccuracy);
   return (
     <div className={style.container}>
       <header className={style.header}>

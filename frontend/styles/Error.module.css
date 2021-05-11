@@ -12,6 +12,7 @@
   color: white;
   position: relative;
   overflow: hidden;
+  box-sizing: border-box;
 }
 .buttonValidate {
   background-color: var(--hover);
