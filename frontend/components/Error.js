@@ -33,7 +33,14 @@ export default function Error({
       </ul>
       <p>
         If none of the above reasons apply to you, don't hesitate to create an
-        issue on the github of the application
+        issue on the{" "}
+        <a
+          href="https://github.com/RomainGuarinoni/Osu-dashboard"
+          target="__blank"
+          className={style.highlight}
+        >
+          github of the application
+        </a>
       </p>
       <button className={style.buttonValidate} onClick={handleError}>
         i understand

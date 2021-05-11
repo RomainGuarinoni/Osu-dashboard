@@ -8,7 +8,7 @@ import MapRank from "../components/MapRank";
 import GlobalStatistics from "../components/GlobalStatistics";
 import { useRouter } from "next/router";
 import Navigation from "../components/Navigation";
-export default function Profil() {
+export default function Profil({ setErrorSWR }) {
   const router = useRouter();
   const userID = getUrlParam("userID");
   const token = getUrlParam("token");
@@ -26,12 +26,11 @@ export default function Profil() {
     `http://localhost:5000/getUser/${userID}/${token}`,
     fetcher
   );
-  if (error)
-    return (
-      <div>
-        <p>error</p>
-      </div>
-    );
+  if (error) {
+    setErrorSWR(true);
+    return <div className={style.container}></div>;
+  }
+
   if (!data)
     return (
       <div className={style.container}>

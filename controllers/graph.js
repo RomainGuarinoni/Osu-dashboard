@@ -49,7 +49,7 @@ exports.getGraphData = (req, res, next) => {
         recentAccuracy.push(element.accuracy);
         recentDifficulty.push(element.beatmap.difficulty_rating);
         let date = new Date(element.created_at);
-        labels.push(`${date.getDay()} / ${date.getMonth()}`);
+        labels.push(`${date.getUTCDate()} / ${date.getMonth() + 1}`);
         labels.push();
         if (element.mods.length == 0) {
           recentMod.normal++;

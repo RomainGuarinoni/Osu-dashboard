@@ -44,3 +44,7 @@
   top: -210px;
   left: -130px;
 }
+
+.highlight {
+  color: var(--hover);
+}

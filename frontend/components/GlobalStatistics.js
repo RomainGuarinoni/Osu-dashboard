@@ -54,7 +54,7 @@ export default function GlobalStatistics({
     },
     {
       img: "podium",
-      name: "Max combp",
+      name: "Max combo",
       data: maxCombo,
       svg: true,
     },

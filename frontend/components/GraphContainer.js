@@ -11,7 +11,7 @@ import TopPlaces from "./TopPlaces";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { faGlobeAmericas } from "@fortawesome/free-solid-svg-icons";
-export default function GraphContainer() {
+export default function GraphContainer({ setErrorSWR }) {
   const { data, error } = useSWR(
     `http://localhost:5000/getGraph/${getUrlParam("userID")}/${getUrlParam(
       "token"
@@ -19,7 +19,10 @@ export default function GraphContainer() {
     fetcher
   );
 
-  if (error) return <div>Error</div>;
+  if (error) {
+    setErrorSWR(true);
+    return <div className={style.container}></div>;
+  }
   if (!data)
     return (
       <div className={style.container}>

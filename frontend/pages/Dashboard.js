@@ -13,8 +13,8 @@ export default function Dashboard() {
         <title>Osu Dashboard</title>
       </Head>
       <div className={style.dashboardContainer}>
-        <Profil error={error} setError={setError} />
-        <GraphContainer error={error} setError={setError} />
+        <Profil setErrorSWR={setError} />
+        <GraphContainer setErrorSWR={setError} />
       </div>
       {error && <Error className={style.error} />}
     </div>
