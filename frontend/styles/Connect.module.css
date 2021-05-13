@@ -1,6 +1,8 @@
 .container {
-  width: 1100px;
-  height: 600px;
+  max-width: 1100px;
+  max-height: 600px;
+  width: 80%;
+  height: 50vw;
   background: var(--light-main);
   border-radius: 20px;
   border: none;
@@ -44,6 +46,7 @@
 .left form button {
   width: 200px;
   height: 50px;
+  min-height: 50px;
   border: none;
   border-radius: 10px;
   font-size: 20px;
@@ -83,7 +86,9 @@
 .right .link {
   margin: 40px 0;
 }
-
+.right h2 {
+  text-align: center;
+}
 .right h2,
 .left h2 {
   font-size: 40px;
@@ -118,4 +123,49 @@
 }
 .error {
   color: var(--error);
+}
+
+@media all and (max-width: 970px) {
+  .right h2,
+  .left h2 {
+    font-size: 30px;
+  }
+  .link {
+    font-size: 30px;
+  }
+}
+@media all and (max-width: 750px) {
+  .right h2,
+  .right p,
+  .right .link {
+    margin: 20px 0;
+  }
+  .right h2 {
+    padding: 0 30px;
+  }
+  .left {
+    width: 60%;
+  }
+  .right {
+    width: 40%;
+  }
+}
+@media all and (max-width: 710px) {
+  .container {
+    flex-direction: column !important;
+    height: 800px !important;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  .left,
+  .right {
+    width: 100%;
+    height: 50%;
+    border-radius: 0px;
+  }
+}
+@media all and (max-width: 372px) {
+  .left form input {
+    padding: 0 5px;
+  }
 }
