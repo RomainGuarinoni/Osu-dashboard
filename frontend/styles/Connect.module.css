@@ -46,6 +46,7 @@
 .left form button {
   width: 200px;
   height: 50px;
+  min-height: 50px;
   border: none;
   border-radius: 10px;
   font-size: 20px;
@@ -141,5 +142,30 @@
   }
   .right h2 {
     padding: 0 30px;
+  }
+  .left {
+    width: 60%;
+  }
+  .right {
+    width: 40%;
+  }
+}
+@media all and (max-width: 710px) {
+  .container {
+    flex-direction: column !important;
+    height: 800px !important;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  .left,
+  .right {
+    width: 100%;
+    height: 50%;
+    border-radius: 0px;
+  }
+}
+@media all and (max-width: 372px) {
+  .left form input {
+    padding: 0 5px;
   }
 }
