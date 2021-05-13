@@ -1,6 +1,6 @@
 import style from "../styles/Error.module.css";
 import { useRouter } from "next/router";
-export default function Error({ returnHome = false }) {
+export default function Error({ setError, returnHome = false, setUserID }) {
   const router = useRouter();
   function handleError() {
     //on suprime le cookie du user
@@ -9,6 +9,9 @@ export default function Error({ returnHome = false }) {
       router.push({
         pathname: "/",
       });
+    } else {
+      setUserID(false);
+      setError(false);
     }
   }
 

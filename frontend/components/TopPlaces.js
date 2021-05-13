@@ -11,7 +11,6 @@ export default function TopPlaces({ dataValue }) {
     labels: labels,
     datasets: [
       {
-        label: "My First Dataset",
         data: dataValue,
         backgroundColor: [
           "#ffd76e",
@@ -44,6 +43,11 @@ export default function TopPlaces({ dataValue }) {
             }
           },
         },
+      },
+    },
+    plugin: {
+      label: {
+        display: false,
       },
     },
   };

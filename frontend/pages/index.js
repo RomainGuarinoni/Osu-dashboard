@@ -62,7 +62,7 @@ export default function Home({ OSU_API_SECRET }) {
         const code = getUrlParam("code");
         console.log(code);
         const codeAux =
-          "def50200af3d4def78c3c39d9f41fe2e0c3a49fc52d4a7964ca9473b1d981d24e4ecce44ad62cb5c511041d09fb43bc617a06f5e7da00e92f2014e6a40709f7a7b7dae8d01d8555e3dba874d3e3e69fd214f097ed3d0d3c2280c5bae042c9986a353354bb3dc89d55ecab463256f4adadf2009a2378de3fe63a8e4fa75c2939989c7881e5e87bbea0c5c839746e34d15c37a985f65848c25007c397ba031ce0ae58a526c495971b3188ba7eb50308bb55fab4ace30642ed0b2da84844a7c52ded86f4ec558865fa58d1bdadad611c0fefc8efd72690d66cc72c9c656b24ef43adc2460a7585891fb40fca4c3650e0b7f200228ebd3927f5f8136c6554b969baef2c3bdd099af8ff28514200f8b525486938d2f12e095c22ac5876247e5688291466b0592ee7baf6732fffebc41451fa0b98acd39b615f09a70f0bb3f6768190deef6b61017f6ffc323d82cf60392de50f0076e1f65c34e711a117e1d8be7c540c64d7d8db67285f7b18a4d2bb15f1c";
+          "def502005b16d63bbaedb55a38e85e314f136f69830e55f3babb89be8e7bb30466195509bf8f53f78f0d3b13dc785891fcbc9063228940162805a273881b03385fe2f44ddfc4a5f98bcbc7fa677f346dfb6d4f6b8dd2d03a9fc4b69aa9e7ebf1b5795ae2b71d0245aca1d51de5021b4a4fad470a23d665d55498bf90386abe3df0edf137be62caa44e3d62ced5037e0972a1f323caed482ae99ffc6958cc6c7fae2eab24f2c4e6651e6ba80db283a4b5dd22457c259341aac50dab210d2075a4fd4c2fb8af4fb2905101de6743c79d906c1d0b23d317fc0619e17ce4bd6c508eaa65edc4d38fa2e04d1eec16c6f1c6efa538dd2708e30a049b78ba845ab397eb9e6e53c9a44f312b9ec9bc4232d43c38eb45290bc554d7036e753418b53cbbdf40e2c3298ea647635acafe743201719bde76d9c4e5f3f906b718fbb914ab5d894bed17efeb515de609b2bce9470c7b19a0b605fcb5c8bb3ffe2b869767d70e785968352de33e26c30f6f37896a7eb3";
         getToken(codeAux);
       } else {
         //créer le cookie de redirection
@@ -90,14 +90,7 @@ export default function Home({ OSU_API_SECRET }) {
         {!userID && !error ? (
           <Connect error={error} setError={setError} />
         ) : null}
-        {error ? (
-          <Error
-            error={error}
-            setError={setError}
-            userID={userID}
-            setUserID={setUserID}
-          />
-        ) : null}
+        {error ? <Error setError={setError} setUserID={setUserID} /> : null}
       </div>
     </div>
   );

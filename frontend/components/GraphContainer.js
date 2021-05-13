@@ -8,6 +8,7 @@ import RecentDifficulty from "./RecentDifficulty";
 import RankEvolution from "./RankEvolution";
 import RecentMod from "./RecentMod";
 import TopPlaces from "./TopPlaces";
+import RecentGlobalStats from "./RecentGlobalStats";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { faGlobeAmericas } from "@fortawesome/free-solid-svg-icons";
@@ -20,7 +21,6 @@ export default function GraphContainer({ setErrorSWR }) {
   );
 
   if (error) {
-    console.log("there was an error there");
     setErrorSWR(true);
     return <div className={style.container}></div>;
   }
@@ -51,6 +51,7 @@ export default function GraphContainer({ setErrorSWR }) {
         </footer>
       </div>
     );
+  setErrorSWR(false);
   return (
     <div className={style.container}>
       <header className={style.header}>
@@ -72,6 +73,12 @@ export default function GraphContainer({ setErrorSWR }) {
           />
 
           <RecentMod dataValue={data.recentMod} />
+          <RecentGlobalStats
+            timePlayed={data.timePlayed}
+            averageFault={data.averageFault}
+            averageBPM={data.averageBPM}
+            averageAR={data.averageAR}
+          />
         </div>
       </div>
       <footer className={style.footer}>

@@ -45,9 +45,21 @@ exports.getGraphData = (req, res, next) => {
       };
       let recentDifficulty = new Array();
       let labels = new Array();
+      let totalTimePlayed = new Number();
+      let averageFault = new Number();
+      let averageAR = new Number();
+      let averageBPM = new Number();
       response.data.forEach((element) => {
         recentAccuracy.push(element.accuracy);
         recentDifficulty.push(element.beatmap.difficulty_rating);
+        totalTimePlayed += element.beatmap.total_length;
+        averageFault += element.statistics.count_miss;
+        averageAR += element.beatmap.ar;
+        if (element.mods.includes("DT")) {
+          averageBPM += element.beatmap.bpm * 1.5;
+        } else {
+          averageBPM += element.beatmap.bpm;
+        }
         let date = new Date(element.created_at);
         labels.push(`${date.getUTCDate()} / ${date.getMonth() + 1}`);
         labels.push();
@@ -63,6 +75,10 @@ exports.getGraphData = (req, res, next) => {
       objectResponse["recentMod"] = recentMod;
       objectResponse["recentDifficulty"] = recentDifficulty.reverse();
       objectResponse["labels"] = labels.reverse();
+      objectResponse["timePlayed"] = totalTimePlayed;
+      objectResponse["averageFault"] = averageFault / response.data.length;
+      objectResponse["averageBPM"] = averageBPM / response.data.length;
+      objectResponse["averageAR"] = averageAR / response.data.length;
       return axios({
         url: `https://osu.ppy.sh/api/v2/users/${user}/recent_activity`,
         method: "get",

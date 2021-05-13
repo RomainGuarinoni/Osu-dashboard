@@ -2,11 +2,10 @@ import style from "../styles/Dashboard.module.css";
 import Head from "next/head";
 import Profil from "../components/Profil";
 import GraphContainer from "../components/GraphContainer";
-import Error from "../components/Error";
 import { useState } from "react";
+import { Provider } from "./HeaderContext";
 export default function Dashboard() {
   const [error, setError] = useState(false);
-  console.log(`error : ${error}`);
   return (
     <div className={style.container}>
       <Head>
@@ -21,7 +20,6 @@ export default function Dashboard() {
       </div>
       {error && (
         <div className={style.error}>
-          {" "}
           <Error returnHome={true} />
         </div>
       )}
