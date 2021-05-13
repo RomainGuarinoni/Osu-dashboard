@@ -51,11 +51,6 @@ export default function RankEvolution({ dataValue }) {
           color: "rgba(255,255,255,0.2)",
           display: false,
         },
-        title: {
-          display: true,
-          text: "test ",
-          color: "white",
-        },
         reverse: true,
       },
       xAxis: {

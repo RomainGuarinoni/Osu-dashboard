@@ -41,11 +41,6 @@ export default function RecentAccuracy({ dataValue, labelsValue }) {
           color: "rgba(255,255,255,0.2)",
           display: false,
         },
-        title: {
-          display: true,
-          text: "test ",
-          color: "white",
-        },
       },
       xAxis: {
         ticks: {
