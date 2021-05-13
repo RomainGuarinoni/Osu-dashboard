@@ -1,6 +1,7 @@
 import { Line } from "react-chartjs-2";
 import GraphLayout from "./GraphLayout";
 export default function RecentAccuracy({ dataValue, labelsValue }) {
+  dataValue = dataValue.map((x) => Math.round(x * 10000) / 100);
   const data = {
     labels: labelsValue,
     datasets: [
@@ -46,7 +47,7 @@ export default function RecentAccuracy({ dataValue, labelsValue }) {
           text: "test ",
           color: "white",
         },
-        max: 1,
+        max: 100,
       },
       xAxis: {
         ticks: {

@@ -12,7 +12,7 @@ import RecentGlobalStats from "./RecentGlobalStats";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { faGlobeAmericas } from "@fortawesome/free-solid-svg-icons";
-export default function GraphContainer({ setErrorSWR }) {
+export default function GraphContainer({ errorSWR, setErrorSWR }) {
   const { data, error } = useSWR(
     `http://localhost:5000/getGraph/${getUrlParam("userID")}/${getUrlParam(
       "token"
@@ -22,6 +22,7 @@ export default function GraphContainer({ setErrorSWR }) {
 
   if (error) {
     setErrorSWR(true);
+    console.log(setErrorSWR);
     return <div className={style.container}></div>;
   }
   if (!data)
@@ -51,7 +52,6 @@ export default function GraphContainer({ setErrorSWR }) {
         </footer>
       </div>
     );
-  setErrorSWR(false);
   return (
     <div className={style.container}>
       <header className={style.header}>

@@ -54,7 +54,7 @@ export default function ContactForm() {
             id="msgInput"
           />
         </div>
-        <button class={style.button} type="submit">
+        <button className={style.button} type="submit">
           {" "}
           Submit{" "}
         </button>
