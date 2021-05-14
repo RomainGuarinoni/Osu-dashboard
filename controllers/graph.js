@@ -49,12 +49,27 @@ exports.getGraphData = (req, res, next) => {
       let averageFault = new Number();
       let averageAR = new Number();
       let averageBPM = new Number();
+      let radar = {
+        Difficulty: 0,
+        AR: 0,
+        CS: 0,
+        HP: 0,
+        OD: 0,
+      };
       response.data.forEach((element) => {
         recentAccuracy.push(element.accuracy);
         recentDifficulty.push(element.beatmap.difficulty_rating);
         totalTimePlayed += element.beatmap.total_length;
         averageFault += element.statistics.count_miss;
         averageAR += element.beatmap.ar;
+
+        //set radar data
+        radar.Difficulty += element.beatmap.difficulty_rating;
+        radar.AR += element.beatmap.ar;
+        radar.CS += element.beatmap.cs;
+        radar.HP += element.beatmap.drain;
+        radar.OD += element.beatmap.accuracy;
+
         if (element.mods.includes("DT")) {
           averageBPM += element.beatmap.bpm * 1.5;
         } else {
@@ -71,6 +86,7 @@ exports.getGraphData = (req, res, next) => {
           });
         }
       });
+      Object.keys(radar).map((key) => (radar[key] /= response.data.length));
       objectResponse["recentAccuracy"] = recentAccuracy.reverse();
       objectResponse["recentMod"] = recentMod;
       objectResponse["recentDifficulty"] = recentDifficulty.reverse();
@@ -79,6 +95,7 @@ exports.getGraphData = (req, res, next) => {
       objectResponse["averageFault"] = averageFault / response.data.length;
       objectResponse["averageBPM"] = averageBPM / response.data.length;
       objectResponse["averageAR"] = averageAR / response.data.length;
+      objectResponse["radar"] = radar;
       return axios({
         url: `https://osu.ppy.sh/api/v2/users/${user}/recent_activity`,
         method: "get",
