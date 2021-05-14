@@ -80,7 +80,9 @@ export default function GraphContainer({ setErrorDashboard }) {
             timePlayed={data.timePlayed}
             averageFault={data.averageFault}
             averageBPM={data.averageBPM}
-            averageAR={data.averageAR}
+            failPourcentage={data.failPourcentage}
+            averageMaxCombo={data.averageMaxCombo}
+            averagePP={data.averagePP}
           />
         </div>
       </div>

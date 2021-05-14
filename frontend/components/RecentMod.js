@@ -28,11 +28,20 @@ export default function RecentMod({ dataValue }) {
       },
     ],
   };
+  const options = {
+    plugins: {
+      legend: {
+        labels: {
+          color: "white", //set your desired color
+        },
+      },
+    },
+  };
 
   return (
     <GraphLayout>
       <p>Recent mods played</p>
-      <Doughnut data={data} />
+      <Doughnut data={data} options={options} />
     </GraphLayout>
   );
 }

@@ -5,14 +5,17 @@ import {
   faClock,
   faStopwatch,
   faTimesCircle,
-  faBolt,
+  faTimes,
+  faExclamationCircle,
 } from "@fortawesome/free-solid-svg-icons";
 
 export default function RecentGlobalStats({
   timePlayed,
   averageFault,
   averageBPM,
-  averageAR,
+  failPourcentage,
+  averageMaxCombo,
+  averagePP,
 }) {
   const stats = [
     {
@@ -31,9 +34,19 @@ export default function RecentGlobalStats({
       icon: faClock,
     },
     {
-      data: Math.round(averageAR * 10) / 10,
-      label: "average AR",
-      icon: faBolt,
+      data: `${Math.round(failPourcentage * 100) / 100} %`,
+      label: "Fail pourcentage",
+      icon: faExclamationCircle,
+    },
+    {
+      data: Math.round(averageMaxCombo),
+      label: "Average Max Combo",
+      icon: faTimes,
+    },
+    {
+      iconSecondary: "PP",
+      label: "Average PP",
+      data: Math.round(averagePP),
     },
   ];
   return (
@@ -42,7 +55,11 @@ export default function RecentGlobalStats({
       <div className={style.container}>
         {stats.map((item, index) => (
           <div key={`${index}-${item.label}`} className={style.item}>
-            <FontAwesomeIcon className={style.icon} icon={item.icon} />
+            {item.icon ? (
+              <FontAwesomeIcon className={style.icon} icon={item.icon} />
+            ) : (
+              <p className={style.icon}>{item.iconSecondary}</p>
+            )}
             <p className={style.data}>{item.data}</p>
             <p className={style.label}>{item.label} </p>
           </div>

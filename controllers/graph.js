@@ -49,8 +49,10 @@ exports.getGraphData = (req, res, next) => {
       let labels = new Array();
       let totalTimePlayed = new Number();
       let averageFault = new Number();
-      let averageAR = new Number();
+      let averageMaxCombo = new Number();
       let averageBPM = new Number();
+      let averagePP = new Number();
+      let averagePPCounter = 0;
       let radar = {
         Difficulty: 0,
         AR: 0,
@@ -58,13 +60,17 @@ exports.getGraphData = (req, res, next) => {
         HP: 0,
         OD: 0,
       };
-      console.log(response.data);
       response.data.forEach((element) => {
         recentAccuracy.push(element.accuracy);
         recentDifficulty.push(element.beatmap.difficulty_rating);
         totalTimePlayed += element.beatmap.total_length;
         averageFault += element.statistics.count_miss;
-        averageAR += element.beatmap.ar;
+        averageMaxCombo += element.max_combo;
+
+        if (element.pp != null) {
+          averagePPCounter += 1;
+          averagePP += element.pp;
+        }
 
         //set radar data
         radar.Difficulty += element.beatmap.difficulty_rating;
@@ -97,8 +103,10 @@ exports.getGraphData = (req, res, next) => {
       objectResponse["timePlayed"] = totalTimePlayed;
       objectResponse["averageFault"] = averageFault / response.data.length;
       objectResponse["averageBPM"] = averageBPM / response.data.length;
-      objectResponse["averageAR"] = averageAR / response.data.length;
+      objectResponse["averageMaxCombo"] =
+        averageMaxCombo / response.data.length;
       objectResponse["radar"] = radar;
+      objectResponse["averagePP"] = averagePP / averagePPCounter;
       return axios({
         url: `https://osu.ppy.sh/api/v2/users/${user}/recent_activity`,
         method: "get",
@@ -134,7 +142,7 @@ exports.getGraphData = (req, res, next) => {
       });
       objectResponse["topPlaces"] = topPlaces;
 
-      return {
+      return axios({
         url: `https://osu.ppy.sh/api/v2/users/${user}/scores/recent`,
         method: "get",
         params: {
@@ -144,16 +152,15 @@ exports.getGraphData = (req, res, next) => {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      };
+      });
     })
     .catch((err) => {
       console.log(`error 3  : ${err}`);
       res.status(400).json("an error has occured");
     })
-    .then((reponse) => {
+    .then((response) => {
       objectResponse["failPourcentage"] =
         (response.data.length / recent_include_fails_length) * 100;
-      console.log(objectResponse.failPourcentage);
       res.status(200).json(objectResponse);
     })
     .catch((err) => {

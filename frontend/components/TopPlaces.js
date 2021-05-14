@@ -45,9 +45,12 @@ export default function TopPlaces({ dataValue }) {
         },
       },
     },
-    plugin: {
-      label: {
-        display: false,
+
+    plugins: {
+      legend: {
+        labels: {
+          color: "white", //set your desired color
+        },
       },
     },
   };

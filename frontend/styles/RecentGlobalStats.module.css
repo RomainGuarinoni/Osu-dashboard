@@ -22,6 +22,7 @@
 .icon {
   color: var(--hover);
   font-size: 40px;
+  font-weight: boldc;
 }
 .data {
   font-size: 30px;

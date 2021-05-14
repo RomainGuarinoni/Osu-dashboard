@@ -29,6 +29,13 @@ export default function RadarGraph({ dataValue }) {
         },
       },
     },
+    plugins: {
+      legend: {
+        labels: {
+          color: "white", //set your desired color
+        },
+      },
+    },
   };
 
   return (
