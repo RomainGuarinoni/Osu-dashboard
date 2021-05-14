@@ -12,7 +12,8 @@ import RecentGlobalStats from "./RecentGlobalStats";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { faGlobeAmericas } from "@fortawesome/free-solid-svg-icons";
-export default function GraphContainer({ errorSWR, setErrorSWR }) {
+import Radar from "../components/Radar";
+export default function GraphContainer({ setErrorDashboard }) {
   const { data, error } = useSWR(
     `http://localhost:5000/getGraph/${getUrlParam("userID")}/${getUrlParam(
       "token"
@@ -21,8 +22,8 @@ export default function GraphContainer({ errorSWR, setErrorSWR }) {
   );
 
   if (error) {
-    setErrorSWR(true);
-    console.log(setErrorSWR);
+    console.log(error);
+    setErrorDashboard(true);
     return <div className={style.container}></div>;
   }
   if (!data)
@@ -52,6 +53,7 @@ export default function GraphContainer({ errorSWR, setErrorSWR }) {
         </footer>
       </div>
     );
+  setErrorDashboard(false);
   return (
     <div className={style.container}>
       <header className={style.header}>
@@ -65,6 +67,7 @@ export default function GraphContainer({ errorSWR, setErrorSWR }) {
           />
           <RankEvolution dataValue={data.rankEvolution} />
           <TopPlaces dataValue={data.topPlaces} />
+          <Radar dataValue={data.radar} />
         </div>
         <div className={style.graphRight}>
           <RecentDifficulty

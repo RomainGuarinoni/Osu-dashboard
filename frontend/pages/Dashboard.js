@@ -3,12 +3,10 @@ import Head from "next/head";
 import Profil from "../components/Profil";
 import GraphContainer from "../components/GraphContainer";
 import Error from "../components/Error";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 export default function Dashboard() {
-  const [error, setError] = useState(false);
-  useEffect(() => {
-    console.log(error);
-  }, [error]);
+  const [errorProfil, setErrorProfil] = useState(false);
+  const [errorDashboard, setErrorDashboard] = useState(false);
   return (
     <div className={style.container}>
       <Head>
@@ -16,17 +14,19 @@ export default function Dashboard() {
       </Head>
       <div
         className={style.dashboardContainer}
-        style={error ? { filter: "brightness(40%)" } : {}}
+        style={
+          errorProfil || errorDashboard ? { filter: "brightness(40%)" } : {}
+        }
       >
-        <Profil setErrorSWR={setError} />
-        <GraphContainer setErrorSWR={setError} />
+        <Profil setErrorProfil={setErrorProfil} />
+        <GraphContainer setErrorDashboard={setErrorDashboard} />
       </div>
 
-      {error && (
+      {errorProfil || errorDashboard ? (
         <div className={style.error}>
           <Error returnHome={true} />
         </div>
-      )}
+      ) : null}
     </div>
   );
 }

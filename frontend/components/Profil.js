@@ -7,7 +7,7 @@ import useSWR from "swr";
 import MapRank from "../components/MapRank";
 import GlobalStatistics from "../components/GlobalStatistics";
 import Navigation from "../components/Navigation";
-export default function Profil({ errorSWR, setErrorSWR }) {
+export default function Profil({ setErrorProfil }) {
   const userID = getUrlParam("userID");
   const token = getUrlParam("token");
   function sortMapRank(object) {
@@ -25,7 +25,7 @@ export default function Profil({ errorSWR, setErrorSWR }) {
     fetcher
   );
   if (error) {
-    setErrorSWR(true);
+    setErrorProfil(true);
     console.log("%cerror", "color : red");
     return <div className={style.container}></div>;
   }
@@ -37,7 +37,7 @@ export default function Profil({ errorSWR, setErrorSWR }) {
       </div>
     );
   const finalData = JSON.parse(data);
-
+  setErrorProfil(false);
   return (
     <div className={style.container}>
       <ProfilPicture

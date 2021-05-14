@@ -59,11 +59,13 @@
   background-color: var(--hover);
   color: white;
 }
+
 .buttonInvalidate {
   background-color: grey;
   color: white;
   cursor: default !important;
 }
+
 .right {
   width: 50%;
   height: 100%;
