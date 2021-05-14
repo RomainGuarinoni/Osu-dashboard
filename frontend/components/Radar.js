@@ -22,22 +22,11 @@ export default function RadarGraph({ dataValue }) {
       mode: "index",
       intersect: false,
     },
-    plugins: {
-      legend: {
-        labels: {
-          color: "white", //set your desired color
+    scales: {
+      r: {
+        ticks: {
+          display: false,
         },
-      },
-    },
-    label: {
-      color: "blue",
-    },
-    scale: {
-      ticks: {
-        callback: function () {
-          return "";
-        },
-        backdropColor: "rgba(0, 0, 0, 0)",
       },
     },
   };

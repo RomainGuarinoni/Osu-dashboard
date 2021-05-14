@@ -2,6 +2,7 @@ const axios = require("axios");
 exports.getGraphData = (req, res, next) => {
   const user = req.params.userID;
   const token = req.params.token;
+  let recent_include_fails_length = new Number();
   let objectResponse = new Object();
   axios({
     url: `https://osu.ppy.sh/api/v2/users/${user}`,
@@ -29,6 +30,7 @@ exports.getGraphData = (req, res, next) => {
       res.status(400).json("there was an error");
     })
     .then((response) => {
+      recent_include_fails_length = response.data.length;
       let recentAccuracy = new Array();
       let recentMod = {
         normal: 0,
@@ -56,6 +58,7 @@ exports.getGraphData = (req, res, next) => {
         HP: 0,
         OD: 0,
       };
+      console.log(response.data);
       response.data.forEach((element) => {
         recentAccuracy.push(element.accuracy);
         recentDifficulty.push(element.beatmap.difficulty_rating);
@@ -130,10 +133,31 @@ exports.getGraphData = (req, res, next) => {
         }
       });
       objectResponse["topPlaces"] = topPlaces;
-      res.status(200).json(objectResponse);
+
+      return {
+        url: `https://osu.ppy.sh/api/v2/users/${user}/scores/recent`,
+        method: "get",
+        params: {
+          limit: 50,
+          include_fails: 0,
+        },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
     })
     .catch((err) => {
       console.log(`error 3  : ${err}`);
+      res.status(400).json("an error has occured");
+    })
+    .then((reponse) => {
+      objectResponse["failPourcentage"] =
+        (response.data.length / recent_include_fails_length) * 100;
+      console.log(objectResponse.failPourcentage);
+      res.status(200).json(objectResponse);
+    })
+    .catch((err) => {
+      console.log(`last error ${err}`);
       res.status(400).json("an error has occured");
     });
 };

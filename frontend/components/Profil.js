@@ -37,7 +37,7 @@ export default function Profil({ setErrorProfil }) {
       </div>
     );
   const finalData = JSON.parse(data);
-  setErrorProfil(false);
+  //setErrorProfil(false);
   return (
     <div className={style.container}>
       <ProfilPicture
