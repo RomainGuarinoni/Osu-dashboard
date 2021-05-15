@@ -8,22 +8,11 @@ import Error from "../components/Error";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
+import { getCookie } from "../function/getCookie";
 import { getUrlParam } from "../function/getUrlParam";
 export default function Home({ OSU_API_SECRET }) {
   //return cookie value
   const router = useRouter();
-  function getCookie(value) {
-    const cookie = document.cookie;
-    let result = cookie.split("; ");
-    try {
-      // on essaye de trouver le cookie code
-      result = result.find((row) => row.startsWith(value)).split("=")[1];
-      return result;
-    } catch (error) {
-      //sinon on retourne null
-      return null;
-    }
-  }
   //return the dcode in the URL after redirection from osu website
 
   // return the token or an error
@@ -39,9 +28,9 @@ export default function Home({ OSU_API_SECRET }) {
       },
     })
       .then((res) => {
+        document.cookie = `token = ${res.data.access_token}`;
         router.push({
           pathname: "Dashboard",
-          query: { userID: getCookie("userID"), token: res.data.access_token },
         });
       })
       .catch((e) => {

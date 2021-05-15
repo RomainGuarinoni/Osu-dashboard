@@ -1,7 +1,7 @@
 import style from "../styles/GraphContainer.module.css";
 import useSWR from "swr";
 import { fetcher } from "../function/fetcher";
-import { getUrlParam } from "../function/getUrlParam";
+import { getCookie } from "../function/getCookie";
 import Loader from "./Loader";
 import RecentAccuracy from "./RecentAccuracy";
 import RecentDifficulty from "./RecentDifficulty";
@@ -15,7 +15,7 @@ import { faGlobeAmericas } from "@fortawesome/free-solid-svg-icons";
 import Radar from "../components/Radar";
 export default function GraphContainer({ setErrorDashboard }) {
   const { data, error } = useSWR(
-    `http://localhost:5000/getGraph/${getUrlParam("userID")}/${getUrlParam(
+    `http://localhost:5000/getGraph/${getCookie("userID")}/${getCookie(
       "token"
     )}`,
     fetcher

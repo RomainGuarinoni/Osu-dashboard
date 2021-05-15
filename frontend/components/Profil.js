@@ -2,14 +2,14 @@ import style from "../styles/Profil.module.css";
 import ProfilPicture from "../components/ProfilPicture";
 import { fetcher } from "../function/fetcher";
 import Loader from "../components/Loader";
-import { getUrlParam } from "../function/getUrlParam";
+import { getCookie } from "../function/getCookie";
 import useSWR from "swr";
 import MapRank from "../components/MapRank";
 import GlobalStatistics from "../components/GlobalStatistics";
 import Navigation from "../components/Navigation";
 export default function Profil({ setErrorProfil }) {
-  const userID = getUrlParam("userID");
-  const token = getUrlParam("token");
+  const userID = getCookie("userID");
+  const token = getCookie("token");
   function sortMapRank(object) {
     let objectAux = {
       ssh: object.ss,

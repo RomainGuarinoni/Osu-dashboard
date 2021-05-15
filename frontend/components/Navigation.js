@@ -1,8 +1,6 @@
 import style from "../styles/Navigation.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { getUrlParam } from "../function/getUrlParam";
 import { useRouter } from "next/router";
-import { useState } from "react";
 import {
   faChartLine,
   faAddressBook,
@@ -22,10 +20,6 @@ export default function Navigation() {
     } else {
       router.push({
         pathname: route,
-        query: {
-          userID: getUrlParam("userID"),
-          token: getUrlParam("token"),
-        },
       });
     }
   }
