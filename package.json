@@ -4,6 +4,8 @@
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "googleapis": "^73.0.0",
+    "nodemailer": "^6.6.0",
     "nodemon": "^2.0.7"
   },
   "name": "osu-dashboard-serveur",
@@ -11,7 +13,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev" : "nodemon server/app.js"
+    "dev": "nodemon server/app.js"
   },
   "author": "",
   "license": "ISC",
