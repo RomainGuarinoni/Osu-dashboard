@@ -3,12 +3,12 @@ const { google } = require("googleapis");
 const dotenv = require("dotenv");
 dotenv.config();
 const CLIENT_ID =
-  "727099782936-gond90d1mk0kpf0glvit1kndnh9g24m1.apps.googleusercontent.com";
+  "81107138508-e6ura151ftv46fla5fgck1ntf6sstc9b.apps.googleusercontent.com";
 
 //const CLIENT_SECRET = ;
 const REDIRECT_URL = "https://developers.google.com/oauthplayground";
 const REFRESH_TOKEN =
-  "1//04GXX3UftY5-9CgYIARAAGAQSNwF-L9Irw7dN2Ro3Y13mEbKB2E5rZ6zUgZDopWR04SaEUJtHqiJ-e_XrMrSdCQRKIqQGthBU7Dk";
+  "1//04KHMIQOZ3-_XCgYIARAAGAQSNwF-L9IrjgVJ_3VqLPHKyY_zxAetrqzIA-qaJaom2qbgah0jqw2_mDOWgTpinDtHvwGXc7IRLjk";
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const oAuth2Client = new google.auth.OAuth2(
   CLIENT_ID,
@@ -23,7 +23,7 @@ async function sendMail(req, res, next) {
       service: "gmail",
       auth: {
         type: "OAuth2",
-        user: "romain.guar91@gmail.com",
+        user: "osudashboard@gmail.com",
         clientId: CLIENT_ID,
         clientSecret: CLIENT_SECRET,
         refreshToken: REFRESH_TOKEN,
@@ -33,9 +33,9 @@ async function sendMail(req, res, next) {
     });
 
     const options = {
-      from: "OSU DASHBOARD 💻",
+      from: "OSU DASHBOARD 💻 <osudashboard@gmail.com>",
       to: "romain.guar91@gmail.com",
-      subject: "Dashboard contact",
+      subject: "OSU DASHBOARD 💻",
       text: `${req.body.user} \n ${req.body.email} \n \n ${req.body.msg}`,
     };
     const result = await transport.sendMail(options);
