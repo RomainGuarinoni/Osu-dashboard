@@ -3,15 +3,28 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { faGlobeAmericas } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 export default function ContactForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [msg, setMsg] = useState("");
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
   function submit(e) {
-    e.preventDefault();
-    console.log(name);
-    console.log(email);
-    console.log(msg);
+    axios({
+      method: "post",
+      url: "http://localhost:5000/sendMail",
+      data: {
+        user: name,
+        email: email,
+        msg: msg,
+      },
+    })
+      .then(() => setSuccess(true))
+      .catch((err) => {
+        setError(true);
+        console.log(err);
+      });
   }
 
   return (
@@ -58,6 +71,12 @@ export default function ContactForm() {
           {" "}
           Submit{" "}
         </button>
+        {success && <p className={style.success}>The message has been sent</p>}
+        {error && (
+          <p className={style.error}>
+            An error has occurred, please try again later
+          </p>
+        )}
       </form>
       <footer className={style.footer}>
         <a

@@ -93,3 +93,10 @@
 .brandIcon:hover {
   color: var(--hover);
 }
+
+.error {
+  color: var(--error);
+}
+.success {
+  color: var(--green);
+}
