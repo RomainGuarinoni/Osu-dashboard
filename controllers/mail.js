@@ -9,16 +9,14 @@ const CLIENT_ID =
 const REDIRECT_URL = "https://developers.google.com/oauthplayground";
 const REFRESH_TOKEN =
   "1//04GXX3UftY5-9CgYIARAAGAQSNwF-L9Irw7dN2Ro3Y13mEbKB2E5rZ6zUgZDopWR04SaEUJtHqiJ-e_XrMrSdCQRKIqQGthBU7Dk";
-
+const CLIENT_SECRET = process.env.CLIENT_SECRET;
+const oAuth2Client = new google.auth.OAuth2(
+  CLIENT_ID,
+  CLIENT_SECRET,
+  REDIRECT_URL
+);
+oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
 async function sendMail(req, res, next) {
-  const CLIENT_SECRET = process.env.CLIENT_SECRET;
-  const oAuth2Client = new google.auth.OAuth2(
-    CLIENT_ID,
-    CLIENT_SECRET,
-    REDIRECT_URL
-  );
-  oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
-  console.log("client secret : ", CLIENT_SECRET);
   try {
     const accessToken = await oAuth2Client.getAccessToken();
     const transport = nodeMailer.createTransport({

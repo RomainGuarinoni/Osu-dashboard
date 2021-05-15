@@ -11,6 +11,7 @@ export default function ContactForm() {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
   function submit(e) {
+    e.preventDefault();
     axios({
       method: "post",
       url: "http://localhost:5000/sendMail",
