@@ -1,5 +1,6 @@
 .container {
-  width: 900px;
+  max-width: 900px;
+  width: 90%;
   padding: 30px 0;
   background: var(--light-main);
   border-radius: 20px;
@@ -13,6 +14,9 @@
   position: relative;
   overflow: hidden;
   box-sizing: border-box;
+}
+.container p {
+  text-align: center;
 }
 .buttonValidate {
   background-color: var(--hover);
@@ -44,6 +48,19 @@
   position: absolute;
   top: -210px;
   left: -130px;
+}
+@media all and (max-width: 775px) {
+  .container::after {
+    width: 300px;
+    height: 400px;
+  }
+}
+@media all and (max-width: 485px) {
+  .container::after {
+    width: 300px;
+    height: 400px;
+    left: -180px;
+  }
 }
 
 .highlight {
