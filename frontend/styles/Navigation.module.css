@@ -15,3 +15,19 @@
 .nav:hover {
   color: var(--hover);
 }
+@media all and (max-height: 848px) {
+  .container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 20px;
+  }
+  .nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .nav p {
+    display: none;
+  }
+}

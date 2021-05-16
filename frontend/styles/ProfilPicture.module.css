@@ -7,6 +7,14 @@
   align-items: center;
   margin: 30px 0;
 }
+@media all and (max-height: 952px) {
+  .container {
+    margin: 30px 0 0 0 !important;
+  }
+  .container h2 {
+    margin: 0px 0 0 0 !important;
+  }
+}
 
 .img {
   width: 150px;
