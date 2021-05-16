@@ -17,3 +17,19 @@
   align-items: center;
   justify-content: space-around;
 }
+.navigation {
+  width: 100%;
+}
+@media all and (max-width: 740px) {
+  .container {
+    width: 100% !important;
+    height: auto !important;
+  }
+  .navigation {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0px;
+    order: -1;
+    background: var(--dark-main);
+  }
+}

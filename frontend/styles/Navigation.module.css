@@ -31,3 +31,31 @@
     display: none;
   }
 }
+@media all and (max-width: 740px) {
+  .container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 20px;
+  }
+  .nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .nav p {
+    display: none;
+  }
+
+  .title {
+    display: block !important;
+  }
+}
+.title {
+  letter-spacing: 2px;
+  display: block;
+  color: white;
+  text-align: center;
+  margin: 5px;
+  display: none;
+}

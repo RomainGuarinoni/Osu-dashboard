@@ -30,6 +30,15 @@
   color: white;
   font-size: 18px;
 }
+@media all and (max-width: 740px) {
+  .statsBox {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .statItem {
+    margin: 5px 0;
+  }
+}
 .statItem {
   display: flex;
   align-items: center;

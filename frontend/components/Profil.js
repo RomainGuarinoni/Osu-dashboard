@@ -43,6 +43,7 @@ export default function Profil({ setErrorProfil }) {
       <ProfilPicture
         avatar_url={finalData.avatar_url}
         username={finalData.username}
+        className={style.ProfilPicture}
       />
       <div className={style.mapRank}>
         {Object.keys(sortMapRank(finalData.statistics.grade_counts)).map(
@@ -57,6 +58,7 @@ export default function Profil({ setErrorProfil }) {
         )}
       </div>
       <GlobalStatistics
+        className={style.GlobalStatistics}
         globalRank={finalData.statistics.global_rank}
         countryRank={finalData.statistics.country_rank}
         level={finalData.statistics.level.current}
@@ -65,7 +67,9 @@ export default function Profil({ setErrorProfil }) {
         maxPP={finalData.bestMapScore}
         maxCombo={finalData.statistics.maximum_combo}
       />
-      <Navigation />
+      <div className={style.navigation}>
+        <Navigation />
+      </div>
     </div>
   );
 }

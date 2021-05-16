@@ -25,6 +25,7 @@ export default function Navigation() {
   }
   return (
     <div className={style.container}>
+      <h1 className={style.title}>OSU DASHBOARD</h1>
       <div className={style.nav} onClick={() => nav("Dashboard")}>
         <p>Dashboard</p>
         <FontAwesomeIcon icon={faChartLine} />

@@ -18,6 +18,12 @@
   height: 100%;
   overflow-y: hidden;
 }
+@media all and (max-width: 740px) {
+  .dashboardContainer {
+    flex-direction: column;
+    overflow-y: scroll !important;
+  }
+}
 .error {
   position: absolute;
   z-index: 2;

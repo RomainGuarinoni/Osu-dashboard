@@ -16,6 +16,15 @@
   }
 }
 
+@media all and (max-width: 740px) {
+  .img {
+    width: 20vw !important;
+    height: 20vw !important;
+  }
+  .container h2 {
+    font-size: 3vw;
+  }
+}
 .img {
   width: 150px;
   height: 150px;
