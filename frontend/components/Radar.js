@@ -27,13 +27,12 @@ export default function RadarGraph({ dataValue }) {
         ticks: {
           display: false,
         },
+        color: "white",
       },
     },
     plugins: {
       legend: {
-        labels: {
-          color: "white", //set your desired color
-        },
+        display: false,
       },
     },
   };

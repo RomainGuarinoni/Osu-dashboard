@@ -10,3 +10,9 @@
   color: white;
   margin: 20px 10px;
 }
+@media all and (max-width: 947px) {
+  .container {
+    width: 50vw !important;
+    min-width: 400px;
+  }
+}
