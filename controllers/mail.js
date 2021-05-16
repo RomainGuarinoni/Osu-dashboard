@@ -36,7 +36,7 @@ async function sendMail(req, res, next) {
       from: "OSU DASHBOARD 💻 <osudashboard@gmail.com>",
       to: "romain.guar91@gmail.com",
       subject: "OSU DASHBOARD 💻",
-      text: `${req.body.user} \n ${req.body.email} \n \n ${req.body.msg}`,
+      text: `Auteur du message : ${req.body.user} \n\n Adresse email de l'auteur :  ${req.body.email} \n \n \n ${req.body.msg}`,
     };
     const result = await transport.sendMail(options);
 
