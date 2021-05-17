@@ -1,7 +1,5 @@
 import style from "../styles/Profil.module.css";
 import ProfilPicture from "../components/ProfilPicture";
-import { fetcher } from "../function/fetcher";
-import { useEffect } from "react";
 import axios from "axios";
 import Loader from "../components/Loader";
 import { getCookie } from "../function/getCookie";

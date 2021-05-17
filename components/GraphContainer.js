@@ -1,9 +1,7 @@
 import style from "../styles/GraphContainer.module.css";
 import useSWR from "swr";
-import { fetcher } from "../function/fetcher";
 import { getCookie } from "../function/getCookie";
 import axios from "axios";
-import { useEffect } from "react";
 import Loader from "./Loader";
 import RecentAccuracy from "./RecentAccuracy";
 import RecentDifficulty from "./RecentDifficulty";

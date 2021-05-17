@@ -21,7 +21,7 @@ export default function Home({ OSU_API_SECRET }) {
       method: "post",
       url: "/api/getAccessToken", // a changer pour la prod
       data: {
-        client_id: 6885,
+        client_id: 7322,
         client_secret: OSU_API_SECRET,
         code: code,
         redirect_uri: "https://example.com", // a changer pour la prod
@@ -57,7 +57,7 @@ export default function Home({ OSU_API_SECRET }) {
         //créer le cookie de redirection
         document.cookie = "code=true;";
         try {
-          window.location.href = `http://localhost:5500`; //https://osu.ppy.sh/oauth/authorize?client_id=6885&redirect_uri=https://example.com&response_type=code&scope=public
+          window.location.href = `http://localhost:5500`; //https://osu.ppy.sh/oauth/authorize?client_id=7322&redirect_uri=https://example.com&response_type=code&scope=public
         } catch (err) {
           setError(true);
           document.cookie = "code=false;";
