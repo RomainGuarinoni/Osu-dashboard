@@ -19,7 +19,7 @@ export default function Home({ OSU_API_SECRET }) {
   async function getToken(code) {
     await axios({
       method: "post",
-      url: "http://localhost:5000/getAccessToken", // a changer pour la prod
+      url: "/api/getAccessToken", // a changer pour la prod
       data: {
         client_id: 6885,
         client_secret: OSU_API_SECRET,
