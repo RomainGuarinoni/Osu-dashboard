@@ -110,13 +110,16 @@ export default function handler(req, res) {
       return axios({
         url: `https://osu.ppy.sh/api/v2/users/${user}/recent_activity`,
         method: "get",
+        params: {
+          limit: 50,
+        },
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
     })
     .catch((err) => {
-      res.status(200).json("there is an error");
+      res.status(400).json("there is an error");
       console.log(`error 2 :${err}`);
     })
     .then((response) => {

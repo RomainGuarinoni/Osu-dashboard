@@ -1,6 +1,8 @@
 import style from "../styles/Profil.module.css";
 import ProfilPicture from "../components/ProfilPicture";
 import { fetcher } from "../function/fetcher";
+import { useEffect } from "react";
+import axios from "axios";
 import Loader from "../components/Loader";
 import { getCookie } from "../function/getCookie";
 import useSWR from "swr";
@@ -8,8 +10,6 @@ import MapRank from "../components/MapRank";
 import GlobalStatistics from "../components/GlobalStatistics";
 import Navigation from "../components/Navigation";
 export default function Profil({ setErrorProfil }) {
-  const userID = getCookie("userID");
-  const token = getCookie("token");
   function sortMapRank(object) {
     let objectAux = {
       ssh: object.ss,
@@ -20,9 +20,15 @@ export default function Profil({ setErrorProfil }) {
     };
     return objectAux;
   }
-  const { data, error } = useSWR(
-    `http://localhost:5000/getUser/${userID}/${token}`,
-    fetcher
+  const { data, error } = useSWR("/api/getUser", (url) =>
+    axios({
+      method: "post",
+      url: url,
+      data: {
+        userID: getCookie("userID"),
+        token: getCookie("token"),
+      },
+    }).then((res) => res.data)
   );
   if (error) {
     setErrorProfil(true);
@@ -36,36 +42,36 @@ export default function Profil({ setErrorProfil }) {
         <Loader />
       </div>
     );
-  const finalData = JSON.parse(data);
+
   //setErrorProfil(false);
   return (
     <div className={style.container}>
       <ProfilPicture
-        avatar_url={finalData.avatar_url}
-        username={finalData.username}
+        avatar_url={data.avatar_url}
+        username={data.username}
         className={style.ProfilPicture}
       />
       <div className={style.mapRank}>
-        {Object.keys(sortMapRank(finalData.statistics.grade_counts)).map(
+        {Object.keys(sortMapRank(data.statistics.grade_counts)).map(
           (element, index) => (
             <MapRank
               key={`${element}-${index}`}
               name={element.toUpperCase()}
               color={"white"}
-              data={finalData.statistics.grade_counts[element]}
+              data={data.statistics.grade_counts[element]}
             />
           )
         )}
       </div>
       <GlobalStatistics
         className={style.GlobalStatistics}
-        globalRank={finalData.statistics.global_rank}
-        countryRank={finalData.statistics.country_rank}
-        level={finalData.statistics.level.current}
-        accuracy={finalData.statistics.hit_accuracy}
-        totalPP={finalData.statistics.pp}
-        maxPP={finalData.bestMapScore}
-        maxCombo={finalData.statistics.maximum_combo}
+        globalRank={data.statistics.global_rank}
+        countryRank={data.statistics.country_rank}
+        level={data.statistics.level.current}
+        accuracy={data.statistics.hit_accuracy}
+        totalPP={data.statistics.pp}
+        maxPP={data.bestMapScore}
+        maxCombo={data.statistics.maximum_combo}
       />
       <div className={style.navigation}>
         <Navigation />

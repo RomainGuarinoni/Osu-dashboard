@@ -2,6 +2,8 @@ import style from "../styles/GraphContainer.module.css";
 import useSWR from "swr";
 import { fetcher } from "../function/fetcher";
 import { getCookie } from "../function/getCookie";
+import axios from "axios";
+import { useEffect } from "react";
 import Loader from "./Loader";
 import RecentAccuracy from "./RecentAccuracy";
 import RecentDifficulty from "./RecentDifficulty";
@@ -14,11 +16,15 @@ import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { faGlobeAmericas } from "@fortawesome/free-solid-svg-icons";
 import Radar from "../components/Radar";
 export default function GraphContainer({ setErrorDashboard }) {
-  const { data, error } = useSWR(
-    `http://localhost:5000/getGraph/${getCookie("userID")}/${getCookie(
-      "token"
-    )}`,
-    fetcher
+  const { data, error } = useSWR("/api/getGraph", (url) =>
+    axios({
+      method: "post",
+      url: url,
+      data: {
+        userID: getCookie("userID"),
+        token: getCookie("token"),
+      },
+    }).then((res) => res.data)
   );
 
   if (error) {
@@ -54,6 +60,7 @@ export default function GraphContainer({ setErrorDashboard }) {
       </div>
     );
   setErrorDashboard(false);
+
   return (
     <div className={style.container}>
       <header className={style.header}>
