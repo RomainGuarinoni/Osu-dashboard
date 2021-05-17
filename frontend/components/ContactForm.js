@@ -14,7 +14,7 @@ export default function ContactForm() {
     e.preventDefault();
     axios({
       method: "post",
-      url: "http://localhost:5000/sendMail",
+      url: "/api/sendMail",
       data: {
         user: name,
         email: email,
