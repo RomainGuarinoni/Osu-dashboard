@@ -21,9 +21,13 @@ export default function ContactForm() {
         msg: msg,
       },
     })
-      .then(() => setSuccess(true))
+      .then(() => {
+        setSuccess(true);
+        setError(false);
+      })
       .catch((err) => {
         setError(true);
+        setSuccess(false);
         console.log(err);
       });
   }
