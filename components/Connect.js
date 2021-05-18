@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { faGlobeAmericas } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import axios from "axios";
 export default function Connect({ error, setError }) {
   const [link, setLink] = useState("");
   const [errorInput, setErrorInput] = useState(false);
@@ -12,9 +13,14 @@ export default function Connect({ error, setError }) {
       let userID = /^https:\/\/osu.ppy.sh\/users\/(.*)$/g.exec(link);
 
       // set a cookie for the userID
-      var expires = new Date(Date.now() + 86400 * 1000).toUTCString();
-      document.cookie = `userID=${userID[1]}; expires=${expires}; path=/`;
-
+      axios({
+        method: "post",
+        url: "/api/setCookie",
+        data: {
+          key: "userID",
+          value: userID[1],
+        },
+      });
       //créer un cookie session 'code' pour savoir si c'est la première fois qu'on se connecte ou si on attends le code en retour
       document.cookie = "code=true;";
 
