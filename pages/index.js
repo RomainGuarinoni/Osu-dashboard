@@ -10,8 +10,8 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { getCookie } from "../function/getCookie";
 import { getUrlParam } from "../function/getUrlParam";
-export default function Home({ OSU_API_SECRET }) {
-  //return cookie value
+import { faCommentsDollar } from "@fortawesome/free-solid-svg-icons";
+export default function Home({ OSU_API_SECRET, userIDStatus }) {
   const router = useRouter();
   //return the dcode in the URL after redirection from osu website
 
@@ -28,10 +28,20 @@ export default function Home({ OSU_API_SECRET }) {
       },
     })
       .then((res) => {
-        document.cookie = `token = ${res.data.access_token}`;
-        router.push({
-          pathname: "Dashboard",
-        });
+        axios({
+          method: "post",
+          url: "/api/setCookie",
+          data: {
+            key: "token",
+            value: res.data.access_token,
+          },
+        })
+          .then(() => {
+            router.push({
+              pathname: "Dashboard",
+            });
+          })
+          .catch(() => setError(true));
       })
       .catch((e) => {
         setError(true);
@@ -44,7 +54,7 @@ export default function Home({ OSU_API_SECRET }) {
   //vérifier l'état des cookies code lorsque l'appli est monté
   useEffect(() => {
     // on vérifie si le user s'est déjà connecté auparavant et qu'on a toujours son user id stocké en cookie
-    if (getCookie("userID") != null) {
+    if (userIDStatus) {
       setUserID(true);
       if (getCookie("code") == "true") {
         document.cookie = "code=false;";
@@ -85,10 +95,21 @@ export default function Home({ OSU_API_SECRET }) {
   );
 }
 
-export async function getStaticProps(context) {
+export async function getStaticProps() {
+  let userIDStatus;
+  await axios({
+    url: "/api/isUserConnected",
+  })
+    .then(() => {
+      userIDStatus = true;
+    })
+    .catch(() => {
+      userIDStatus = false;
+    });
   return {
     props: {
       OSU_API_SECRET: process.env.OSU_API_SECRET,
+      userIDStatus: userIDStatus,
     },
   };
 }
