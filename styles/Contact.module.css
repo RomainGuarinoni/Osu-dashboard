@@ -6,3 +6,9 @@
   bottom: 0;
   display: flex;
 }
+
+@media all and (max-width: 740px) {
+  .container {
+    flex-direction: column;
+  }
+}
