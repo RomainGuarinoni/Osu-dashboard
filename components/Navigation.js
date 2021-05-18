@@ -6,14 +6,20 @@ import {
   faAddressBook,
   faDoorOpen,
 } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 export default function Navigation() {
   const router = useRouter();
 
   function nav(route) {
     if (route == "/") {
       //supprime le cookie
-      document.cookie =
-        "userID=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      axios({
+        method: "post",
+        url: "/api/deleteCookie",
+        data: {
+          key: "userID",
+        },
+      });
       router.push({
         pathname: "/",
       });

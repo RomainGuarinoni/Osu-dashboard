@@ -1,7 +1,9 @@
 import axios from "axios";
+import cookie from "cookie";
 export default function handler(req, res) {
-  const user = req.body.userID;
-  const token = req.body.token;
+  let cookies = cookie.parse(res.headers.cookie || "");
+  let user = cookies.userID;
+  let token = cookies.token;
   let responseObject = new Object();
   axios({
     url: `https://osu.ppy.sh/api/v2/users/${user}`,
