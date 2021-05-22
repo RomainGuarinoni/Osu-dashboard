@@ -22,10 +22,6 @@ export default function Profil({ setErrorProfil }) {
     axios({
       method: "post",
       url: url,
-      data: {
-        userID: getCookie("userID"),
-        token: getCookie("token"),
-      },
     }).then((res) => res.data)
   );
   if (error) {

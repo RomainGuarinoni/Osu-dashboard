@@ -10,8 +10,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { getCookie } from "../function/getCookie";
 import { getUrlParam } from "../function/getUrlParam";
-export default function Home({ OSU_API_SECRET }) {
-  //return cookie value
+export default function Home({ OSU_API_SECRET, userIDStatus }) {
   const router = useRouter();
   //return the dcode in the URL after redirection from osu website
 
@@ -28,10 +27,20 @@ export default function Home({ OSU_API_SECRET }) {
       },
     })
       .then((res) => {
-        document.cookie = `token = ${res.data.access_token}`;
-        router.push({
-          pathname: "Dashboard",
-        });
+        axios({
+          method: "post",
+          url: "/api/setCookie",
+          data: {
+            key: "token",
+            value: res.data.access_token,
+          },
+        })
+          .then(() => {
+            router.push({
+              pathname: "Dashboard",
+            });
+          })
+          .catch(() => setError(true));
       })
       .catch((e) => {
         setError(true);
@@ -44,14 +53,14 @@ export default function Home({ OSU_API_SECRET }) {
   //vérifier l'état des cookies code lorsque l'appli est monté
   useEffect(() => {
     // on vérifie si le user s'est déjà connecté auparavant et qu'on a toujours son user id stocké en cookie
-    if (getCookie("userID") != null) {
+    if (userIDStatus) {
       setUserID(true);
       if (getCookie("code") == "true") {
         document.cookie = "code=false;";
         const code = getUrlParam("code");
         console.log(code);
         const codeAux =
-          "def502002030d7bcac4c1e3b4e1e6b6dede9dde4cbd14859636697511dcd36b67bb6778bed19939a8d412dcd1ca54999536861936d71c661aa34be764b6ea6d3f8fd7db3bb23f21713aa1c9dc3da565b2e8da8b584b0db723a872669a1c83ee9d059da4aedf59c2b742ce4e2059c4a03fe7b270fd435ad562e91ff20733e4bb08d380f6ad8cfc728b55574406734b39596d109648a74a961d5c7765c5210b83b6715756c5daae970fe3597db94ed4ca0d0d8d6d5b2d518622e9a95dbc67cc46d7149ac2b5236683dcda2c3a3d198462043f03721812e4b69e045f051d40bb4b0cdca78c2bcf9ed9db9fa79a3f282172b148bc48dc695af1e3a10744db3454ec7bc806673d4ccdf08917b2a6109ff97abf2058fdaa437f63c86790f8f1c4dc47561b0b6d3a17a61d8aa50eb3958691b6e4ad473f08e000ecc4bbeacacc246e3bcdab7b920998bafa377d6214a8276f7fa6ccf5ba57f7aa799837f356c7d0a87bb0fd3524d4e68df61b41331c5ca8b0b";
+          "def50200dc3a09f56247303e5d0a96b048e069897c3c81f395693491db2dfc4d97b0f7b38ed6a5e6e0ca3bfb00121fa7a2035e24bd836099d9984687916db2c16eee0e5222465de4fa93d4859b98dab4283b0c04b0df197cb64b804a953bff6059eb3c798026d2dfbf35342d665b6f65ef1bfeafe4bc0351c1c90c993a3af0927431c8e29d152927e43e5c0994c7aade216f316e29adca6f4b7053603a84cc7aa75aab996c5e722f81bd7912082554568ba44aaa76e9a14363e78ae4dc00e688d59ec9f7da4cc64315f1d0f203e1d3241e2d3416e98531f7532c0e33444d86a5fef3ff2d5779307242c9df77410fd6fc164b03e35530dc195411f10c163dd0ff88bc4d3f46022a4326df6c4c8c8c8fa5f6668d7ee9726d26f81b5a5ec374f1b2b5e2a01e3dcf8d5dfcae6dcbe97adb7b7b086d0b3a27b8773868c0ecb143d2dc704f0baef02433eaa2b386666809cec863d051b654ee1c34b0b19685a0fb52e6ea1714f54d6f9d946420a6c371c9b0";
         getToken(codeAux);
       } else {
         //créer le cookie de redirection
@@ -85,10 +94,24 @@ export default function Home({ OSU_API_SECRET }) {
   );
 }
 
-export async function getStaticProps(context) {
+export async function getStaticProps() {
+  let userIDStatus;
+  await axios({
+    url: "/api/isUserConnected",
+  })
+    .then((res) => {
+      userIDStatus = true;
+      console.log(res.data);
+    })
+    .catch((res) => {
+      userIDStatus = false;
+      console.log(res.data);
+    });
+  console.log(`user is connected : ${userIDStatus}`);
   return {
     props: {
       OSU_API_SECRET: process.env.OSU_API_SECRET,
+      userIDStatus: userIDStatus,
     },
   };
 }

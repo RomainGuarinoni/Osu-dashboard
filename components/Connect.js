@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { faGlobeAmericas } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import axios from "axios";
 export default function Connect({ error, setError }) {
   const [link, setLink] = useState("");
   const [errorInput, setErrorInput] = useState(false);
@@ -10,21 +11,33 @@ export default function Connect({ error, setError }) {
     e.preventDefault();
     if (link.length > 0) {
       let userID = /^https:\/\/osu.ppy.sh\/users\/(.*)$/g.exec(link);
-
+      // this is a test
       // set a cookie for the userID
-      var expires = new Date(Date.now() + 86400 * 1000).toUTCString();
-      document.cookie = `userID=${userID[1]}; expires=${expires}; path=/`;
-
+      axios({
+        method: "post",
+        url: "/api/setCookie",
+        data: {
+          key: "userID",
+          value: userID[1],
+        },
+      })
+        .then((res) => {
+          console.log(res.data);
+          axios({ url: "/api/test" })
+            .then((res) => console.log(res.data))
+            .catch((err) => console.log(err));
+        })
+        .catch((err) => console.log(err));
       //créer un cookie session 'code' pour savoir si c'est la première fois qu'on se connecte ou si on attends le code en retour
       document.cookie = "code=true;";
 
       //envoyer sur la page de sou pour avoir le code
-      try {
+      /*try {
         window.location.href = "http://localhost:5500"; //https://osu.ppy.sh/oauth/authorize?client_id=6885&redirect_uri=https://example.com&response_type=code&scope=public
       } catch (err) {
         setError(true);
         document.cookie = "code=false;";
-      }
+      }*/
     }
   }
   function verifyLinkInput(value) {

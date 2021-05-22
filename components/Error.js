@@ -1,10 +1,17 @@
 import style from "../styles/Error.module.css";
 import { useRouter } from "next/router";
+import axios from "axios";
 export default function Error({ setError, returnHome = false, setUserID }) {
   const router = useRouter();
   function handleError() {
     //on suprime le cookie du user
-    document.cookie = "userID=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    axios({
+      method: "post",
+      url: "/api/deleteCookie",
+      data: {
+        key: "userID",
+      },
+    });
     if (returnHome) {
       router.push({
         pathname: "/",

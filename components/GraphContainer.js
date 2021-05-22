@@ -1,6 +1,5 @@
 import style from "../styles/GraphContainer.module.css";
 import useSWR from "swr";
-import { getCookie } from "../function/getCookie";
 import axios from "axios";
 import Loader from "./Loader";
 import RecentAccuracy from "./RecentAccuracy";
@@ -18,10 +17,6 @@ export default function GraphContainer({ setErrorDashboard }) {
     axios({
       method: "post",
       url: url,
-      data: {
-        userID: getCookie("userID"),
-        token: getCookie("token"),
-      },
     }).then((res) => res.data)
   );
 
