@@ -11,7 +11,7 @@ export default function Connect({ error, setError }) {
     e.preventDefault();
     if (link.length > 0) {
       let userID = /^https:\/\/osu.ppy.sh\/users\/(.*)$/g.exec(link);
-
+      // this is a test
       // set a cookie for the userID
       axios({
         method: "post",
