@@ -3,7 +3,7 @@ import axios from "axios";
 export default function handler(req, res) {
   //const user = req.body.userID;
   //const token = req.body.token;
-  let cookies = cookie.parse(res.headers.cookie || "");
+  let cookies = cookie.parse(req.headers.cookie || "");
   let user = cookies.userID;
   let token = cookies.token;
   let recent_include_fails_length = new Number();

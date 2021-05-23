@@ -1,7 +1,7 @@
 import axios from "axios";
 import cookie from "cookie";
 export default function handler(req, res) {
-  let cookies = cookie.parse(res.headers.cookie || "");
+  let cookies = cookie.parse(req.headers.cookie || "");
   let user = cookies.userID;
   let token = cookies.token;
   let responseObject = new Object();
