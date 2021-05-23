@@ -13,6 +13,13 @@ export default function Error({ setError, returnHome = false, setUserID }) {
       },
     });
     if (returnHome) {
+      await axios({
+        method: "post",
+        url: "/api/deleteCookie",
+        data: {
+          key: "userID",
+        },
+      });
       router.push({
         pathname: "/",
       });
