@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 export default function Error({ setError, returnHome = false, setUserID }) {
   const router = useRouter();
-  function handleError() {
+  async function handleError() {
     //on suprime le cookie du user
     axios({
       method: "post",
@@ -17,6 +17,13 @@ export default function Error({ setError, returnHome = false, setUserID }) {
         pathname: "/",
       });
     } else {
+      await axios({
+        method: "post",
+        url: "/api/deleteCookie",
+        data: {
+          key: "userID",
+        },
+      });
       setUserID(false);
       setError(false);
     }

@@ -37,10 +37,9 @@ export default function Home({ OSU_API_SECRET, userIDStatus }) {
           },
         })
           .then(() => {
-            /*router.push({
+            router.push({
               pathname: "Dashboard",
-            });*/
-            console.log("yeah");
+            });
           })
           .catch(() => setError(true));
       })
@@ -61,7 +60,7 @@ export default function Home({ OSU_API_SECRET, userIDStatus }) {
         document.cookie = "code=false; ";
         const code = getUrlParam("code");
         const codeAux =
-          "def5020052947bf8ab6b42c61b3d96549639e9eefc5ab8fc808d792b84f32f42fa2ef3e52b199df79bf11b232fb9d3d8646053ec7fd532e9c158cddf78a069afef925d71d4c3a9ce5ced0a4c1cca32277880222ec47e22378990a17ee41c1428b5714fbe58cd299cb0729215621f65a1a0ea249fa574f9b3e2c5a0c1d7f497b703760b02e06a862841274431bda0fb59c5fc98305a37c0b014bff88029654049c4a4ea99efb2f4e9900e978be600763453bcec9e2ac6a4716466b028d9e1846680554ed28d8ef585a5dcdbb913adcc419463191689718a23da65a8b5c2060eb84efc7e0c589b0352b2e6681cef5f708584207b870eabb97dd3f5581a32fbcbd34a3c8a1f6b9e588651dd6b5802e5e8fdfa473dbc8c95a5b9f6bae1d55144f3ed66a3bf923805c751c447697111cf766191737ed6f3614abcee60619838458ede754dd77d195a4d6a2a2e257c6b3c43b6dcb6fcf5aaaa00c318a6ef0e8d72bf395bb6250326632c9526c90a23406e0c";
+          "def50200cf916bf793ca62e4dbb2bc399fc90306f920ab24a7eb7d39cc4464d4f9ad460f0387b7124b99329f86e2ffa1dc238670f7c246c455c772bfd6d49c4bef0229eb94952140a5a69ab3eefefbeb74d4fac2178bf274dda2288c3aad5a499821a5bb6c31467287f1ef7b644221ff38cb09bd376e58aad633c6158c9cbaceb6651ab52aa67a8b05c80508a961efce5bb23d6bb2a59bf39ea75f8a32e3589b0b79ab4422a9925acb31525f113eecd818ccc211247ea6651f6e6422392a142ae5a1f6ff375dd716b333092523e5ad34507f2176de6d99ccee6c17293cddfe6a2ba449d51b4d5c70b8ff26e82c9f13d26b9779d41836cdb185847fbdf34dc414f6d456ac48b8d5a9d56f698b5d9ac5fb310d35a9cfe4d1f8a4826f2556384f1863a6571f22588fea95b6b758cb373504f1f02d01d056d99ff66e755517595796484d98c6dfa3e497c9324b800f0769d70165400597b6bdee3384591d190938c060f6c957e7a05d8c12b518dc9f4112";
         getToken(codeAux);
       } else {
         //créer le cookie de redirection
