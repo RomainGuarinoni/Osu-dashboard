@@ -13,4 +13,5 @@ export default function handler(req, res) {
       path: "/",
     })
   );
+  res.status(200).json("cookie deleted");
 }
