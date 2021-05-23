@@ -7,6 +7,7 @@ import Loader from "../components/Loader";
 import Error from "../components/Error";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import cookie from "cookie";
 import axios from "axios";
 import { getCookie } from "../function/getCookie";
 import { getUrlParam } from "../function/getUrlParam";
@@ -36,9 +37,10 @@ export default function Home({ OSU_API_SECRET, userIDStatus }) {
           },
         })
           .then(() => {
-            router.push({
+            /*router.push({
               pathname: "Dashboard",
-            });
+            });*/
+            console.log("yeah");
           })
           .catch(() => setError(true));
       })
@@ -56,20 +58,19 @@ export default function Home({ OSU_API_SECRET, userIDStatus }) {
     if (userIDStatus) {
       setUserID(true);
       if (getCookie("code") == "true") {
-        document.cookie = "code=false;";
+        document.cookie = "code=false; ";
         const code = getUrlParam("code");
-        console.log(code);
         const codeAux =
-          "def50200dc3a09f56247303e5d0a96b048e069897c3c81f395693491db2dfc4d97b0f7b38ed6a5e6e0ca3bfb00121fa7a2035e24bd836099d9984687916db2c16eee0e5222465de4fa93d4859b98dab4283b0c04b0df197cb64b804a953bff6059eb3c798026d2dfbf35342d665b6f65ef1bfeafe4bc0351c1c90c993a3af0927431c8e29d152927e43e5c0994c7aade216f316e29adca6f4b7053603a84cc7aa75aab996c5e722f81bd7912082554568ba44aaa76e9a14363e78ae4dc00e688d59ec9f7da4cc64315f1d0f203e1d3241e2d3416e98531f7532c0e33444d86a5fef3ff2d5779307242c9df77410fd6fc164b03e35530dc195411f10c163dd0ff88bc4d3f46022a4326df6c4c8c8c8fa5f6668d7ee9726d26f81b5a5ec374f1b2b5e2a01e3dcf8d5dfcae6dcbe97adb7b7b086d0b3a27b8773868c0ecb143d2dc704f0baef02433eaa2b386666809cec863d051b654ee1c34b0b19685a0fb52e6ea1714f54d6f9d946420a6c371c9b0";
+          "def5020052947bf8ab6b42c61b3d96549639e9eefc5ab8fc808d792b84f32f42fa2ef3e52b199df79bf11b232fb9d3d8646053ec7fd532e9c158cddf78a069afef925d71d4c3a9ce5ced0a4c1cca32277880222ec47e22378990a17ee41c1428b5714fbe58cd299cb0729215621f65a1a0ea249fa574f9b3e2c5a0c1d7f497b703760b02e06a862841274431bda0fb59c5fc98305a37c0b014bff88029654049c4a4ea99efb2f4e9900e978be600763453bcec9e2ac6a4716466b028d9e1846680554ed28d8ef585a5dcdbb913adcc419463191689718a23da65a8b5c2060eb84efc7e0c589b0352b2e6681cef5f708584207b870eabb97dd3f5581a32fbcbd34a3c8a1f6b9e588651dd6b5802e5e8fdfa473dbc8c95a5b9f6bae1d55144f3ed66a3bf923805c751c447697111cf766191737ed6f3614abcee60619838458ede754dd77d195a4d6a2a2e257c6b3c43b6dcb6fcf5aaaa00c318a6ef0e8d72bf395bb6250326632c9526c90a23406e0c";
         getToken(codeAux);
       } else {
         //créer le cookie de redirection
-        document.cookie = "code=true;";
+        document.cookie = "code=true; ";
         try {
           window.location.href = `http://localhost:5500`; //https://osu.ppy.sh/oauth/authorize?client_id=7322&redirect_uri=https://example.com&response_type=code&scope=public
         } catch (err) {
           setError(true);
-          document.cookie = "code=false;";
+          document.cookie = "code=false; ";
         }
       }
     }
@@ -94,20 +95,13 @@ export default function Home({ OSU_API_SECRET, userIDStatus }) {
   );
 }
 
-export async function getStaticProps() {
-  let userIDStatus;
-  await axios({
-    url: "/api/isUserConnected",
-  })
-    .then((res) => {
-      userIDStatus = true;
-      console.log(res.data);
-    })
-    .catch((res) => {
-      userIDStatus = false;
-      console.log(res.data);
-    });
-  console.log(`user is connected : ${userIDStatus}`);
+export async function getServerSideProps(context) {
+  let userIDStatus = false;
+  let cookies = cookie.parse(context.req.headers.cookie);
+  let userID = cookies.userID;
+  if (userID != undefined) {
+    userIDStatus = true;
+  }
   return {
     props: {
       OSU_API_SECRET: process.env.OSU_API_SECRET,
