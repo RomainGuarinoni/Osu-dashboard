@@ -24,6 +24,7 @@ export default function Error({ setError, returnHome = false, setUserID }) {
           key: "userID",
         },
       });
+
       setUserID(false);
       setError(false);
     }
