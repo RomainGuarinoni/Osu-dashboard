@@ -1,4 +1,4 @@
-import cookie from "coookie";
+import cookie from "cookie";
 
 export default function handler(req, res) {
   let cookies = cookie.parse(req.headers.cookie || "");

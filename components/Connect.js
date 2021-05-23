@@ -7,13 +7,13 @@ import axios from "axios";
 export default function Connect({ error, setError }) {
   const [link, setLink] = useState("");
   const [errorInput, setErrorInput] = useState(false);
-  function Connect(e) {
+  async function Connect(e) {
     e.preventDefault();
-    if (link.length > 0) {
-      let userID = /^https:\/\/osu.ppy.sh\/users\/(.*)$/g.exec(link);
-      // this is a test
+    if (link.length > 0 && !errorInput) {
+      console.log("hello")
+        let userID = /^https:\/\/osu.ppy.sh\/users\/(.*)$/g.exec(link);
       // set a cookie for the userID
-      axios({
+      await axios({
         method: "post",
         url: "/api/setCookie",
         data: {
@@ -22,6 +22,7 @@ export default function Connect({ error, setError }) {
         },
       })
         .then((res) => {
+
           try {
             //créer un cookie session 'code' pour savoir si c'est la première fois qu'on se connecte ou si on attends le code en retour
 
@@ -34,6 +35,7 @@ export default function Connect({ error, setError }) {
           }
         })
         .catch((err) => console.log(err));
+
     }
   }
   function verifyLinkInput(value) {
