@@ -17,6 +17,12 @@ export default function Home({ OSU_API_SECRET, userIDStatus, devStatus }) {
 
   // return the token or an error
   async function getToken(code) {
+    let redirectUri = new String();
+    if (devStatus) {
+      redirectUri = "https://example.com";
+    } else {
+      redirectUri = "https://osu-dashboard.vercel.app";
+    }
     await axios({
       method: "post",
       url: "/api/getAccessToken", // a changer pour la prod
@@ -24,7 +30,7 @@ export default function Home({ OSU_API_SECRET, userIDStatus, devStatus }) {
         client_id: 7322,
         client_secret: OSU_API_SECRET,
         code: code,
-        redirect_uri: "https://example.com", // a changer pour la prod
+        redirect_uri: redirectUri, // a changer pour la prod
       },
     })
       .then((res) => {
