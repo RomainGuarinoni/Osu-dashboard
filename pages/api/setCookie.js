@@ -15,6 +15,5 @@ export default function handler(req, res) {
       path: "/",
     })
   );
-  console.log(req.body.key);
   res.status(200).json({ msg: "cookie has been set : " + req.body.key });
 }
