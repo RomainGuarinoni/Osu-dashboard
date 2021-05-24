@@ -52,10 +52,7 @@ export default function Home({ OSU_API_SECRET, userIDStatus, devStatus }) {
   const [error, setError] = useState(false);
   //vérifier l'état des cookies code lorsque l'appli est monté
   useEffect(() => {
-    axios({
-      url: "/api/isUserConnected",
-    }).then((res) => {
-      console.log("connected");
+    if (userIDStatus) {
       setUserID(true);
       if (getCookie("code") == "true") {
         document.cookie = "code=false; ";
@@ -82,7 +79,7 @@ export default function Home({ OSU_API_SECRET, userIDStatus, devStatus }) {
           document.cookie = "code=false; ";
         }
       }
-    });
+    }
   }, []);
   return (
     <div className={style.container}>
@@ -107,12 +104,14 @@ export default function Home({ OSU_API_SECRET, userIDStatus, devStatus }) {
 export async function getServerSideProps(context) {
   // get the userID cookie
   let userIDStatus = false;
-  let cookies = cookie.parse(context.req.headers.cookie);
-  let userID = cookies.userID;
-  if (userID != undefined) {
-    userIDStatus = true;
+  console.log(context.req.headers.cookie);
+  if (context.req.headers.cookie != undefined) {
+    let cookies = cookie.parse(context.req.headers.cookie);
+    let userID = cookies.userID;
+    if (userID != undefined) {
+      userIDStatus = true;
+    }
   }
-
   //get the NODE_ENV status
   let devStatus = true;
   if (process.env.NODE_ENV == "production") {
