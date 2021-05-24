@@ -4,14 +4,14 @@ import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { faGlobeAmericas } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import axios from "axios";
-export default function Connect({ error, setError }) {
+export default function Connect({ error, setError, devStatus }) {
   const [link, setLink] = useState("");
   const [errorInput, setErrorInput] = useState(false);
   async function Connect(e) {
     e.preventDefault();
     if (link.length > 0 && !errorInput) {
-      console.log("hello")
-        let userID = /^https:\/\/osu.ppy.sh\/users\/(.*)$/g.exec(link);
+      console.log("hello");
+      let userID = /^https:\/\/osu.ppy.sh\/users\/(.*)$/g.exec(link);
       // set a cookie for the userID
       await axios({
         method: "post",
@@ -21,21 +21,19 @@ export default function Connect({ error, setError }) {
           value: userID[1],
         },
       })
-        .then((res) => {
-
+        .then(() => {
           try {
-            //créer un cookie session 'code' pour savoir si c'est la première fois qu'on se connecte ou si on attends le code en retour
-
-            //envoyer sur la page de sou pour avoir le code
-            document.cookie = "code=true;";
-            window.location.href = "http://localhost:5500"; //https://osu.ppy.sh/oauth/authorize?client_id=6885&redirect_uri=https://example.com&response_type=code&scope=public
+            if (devStatus) {
+              window.location.href = `http://localhost:5500`;
+            } else {
+              window.location.href = `https://osu.ppy.sh/oauth/authorize?client_id=7322&redirect_uri=https://example.com&response_type=code&scope=public`;
+            }
           } catch (err) {
             setError(true);
-            document.cookie = "code=false;";
+            document.cookie = "code=false; ";
           }
         })
         .catch((err) => console.log(err));
-
     }
   }
   function verifyLinkInput(value) {
