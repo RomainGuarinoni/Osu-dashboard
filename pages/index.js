@@ -50,7 +50,6 @@ export default function Home({ OSU_API_SECRET, userIDStatus, devStatus }) {
 
   const [userID, setUserID] = useState(false);
   const [error, setError] = useState(false);
-  let userIDStatus = false;
   //vérifier l'état des cookies code lorsque l'appli est monté
   useEffect(() => {
     axios({
