@@ -10,7 +10,6 @@ export default function Connect({ error, setError, devStatus }) {
   async function Connect(e) {
     e.preventDefault();
     if (link.length > 0 && !errorInput) {
-      console.log("hello");
       let userID = /^https:\/\/osu.ppy.sh\/users\/(.*)$/g.exec(link);
       // set a cookie for the userID
       await axios({
@@ -22,6 +21,7 @@ export default function Connect({ error, setError, devStatus }) {
         },
       })
         .then(() => {
+          document.cookie = "code=true; ";
           try {
             if (devStatus) {
               window.location.href = `http://localhost:5500`;

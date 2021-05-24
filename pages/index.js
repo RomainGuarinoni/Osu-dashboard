@@ -17,12 +17,6 @@ export default function Home({ OSU_API_SECRET, userIDStatus, devStatus }) {
 
   // return the token or an error
   async function getToken(code) {
-    let redirectUri = new String();
-    if (devStatus) {
-      redirectUri = "https://example.com";
-    } else {
-      redirectUri = "https://osu-dashboard.vercel.app";
-    }
     await axios({
       method: "post",
       url: "/api/getAccessToken", // a changer pour la prod
@@ -30,7 +24,7 @@ export default function Home({ OSU_API_SECRET, userIDStatus, devStatus }) {
         client_id: 7322,
         client_secret: OSU_API_SECRET,
         code: code,
-        redirect_uri: redirectUri, // a changer pour la prod
+        redirect_uri: "https://osu-dashboard.vercel.app", // a changer pour la prod
       },
     })
       .then((res) => {
@@ -64,7 +58,7 @@ export default function Home({ OSU_API_SECRET, userIDStatus, devStatus }) {
         document.cookie = "code=false; ";
         const code = getUrlParam("code");
         const codeAux =
-          "def502003b45288c833fb5ba53e7ac7d5c06ba539e15bf5782de73832aa81456d0f5d1d56724bddb0514e5d565bb0a7c10736fbe03b35fc897946a31eaf807d45d6a14720c6d063b66c438c9ebe8be27169512d8452d33dafc94a735e245ce072eaa3a07a6e23c2f944c176ecdbaaa4b7a44e7e915889987e9947978c9ef374e5c33c9bc2f5b727122615fe3dc59430c61c146c521384bfe7bd893025d8e6788d808bb44be857a1dadd6461087021fb803bc1e0931d31ea5109197309ee2f433d59945e6da83f516f44cd68e7fa198db063a27cc8c1df07b5067f27eb469c62865555007d2d6e5e2959b52108d8a14d86f2f9a56307189e61800656a21890edc2dc1f9feccc33988a4df35fca8ecb488d08be35038b07e04e42cb7e3d3d9960728fe9906bc24701d19e18b7d95e4406a4b0b90f7ee07dc824f84e59880fb8af287d2c7d11db7b146290b607337bd58e9dfba9b40af8496683b43369394b8ed75d17233be9a9dd16d087dc3015368d7";
+          "def5020032f2819f7eed644a85205ed2c78257259839a64abdeda73f98f36aace3e6f709c21579e60a209d65ff35adc55e315228a1a3f319680554fb6140ad13a7a9511a76ee1abc6357a620ce1aebef3b1a1f82fc50c66fc37b96ba986810c55ec587061032c1c6efac7303a85c2b0f7b4090a082f732a67bf66d060317e9ea6eeee42fc3278a2f9743fba66d1e3c1e0b35f8041765efecc0a63be08d9ab172ba3972361bdba3dc98fbb9f87deb4ccf662cc18cc70724f9d6403f35ed0cd6faf4d7332b103b64757dd4695db59acdd1abc0ff26c482513940465a53cf8301e668af055f8f25f9a53147463c47d6ad3e491f14ac2b4af640383fe43c58113153d55c2fa68aef586d551cc62512857418a04f2bcdc39b5ec72547a0924e72fb310bab7046a7d6076e2ba387daba3afd3bbae151f5dee2ccad582313e5ec1636a8cab96a18218df4cdbfb111c0e55639fb54927326f29da06db91898582a9e6697951d7f8f7320100e541ef8445bde37a6feff6ab9a4912e4648e223c6";
         if (devStatus) {
           getToken(code);
         } else {
@@ -85,6 +79,8 @@ export default function Home({ OSU_API_SECRET, userIDStatus, devStatus }) {
           document.cookie = "code=false; ";
         }
       }
+    } else {
+      document.cookie = "code=false; ";
     }
   }, []);
   return (
@@ -110,7 +106,6 @@ export default function Home({ OSU_API_SECRET, userIDStatus, devStatus }) {
 export async function getServerSideProps(context) {
   // get the userID cookie
   let userIDStatus = false;
-  console.log(context.req.headers.cookie);
   if (context.req.headers.cookie != undefined) {
     let cookies = cookie.parse(context.req.headers.cookie);
     let userID = cookies.userID;
