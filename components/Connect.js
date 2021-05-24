@@ -7,13 +7,13 @@ import axios from "axios";
 export default function Connect({ error, setError, devStatus }) {
   const [link, setLink] = useState("");
   const [errorInput, setErrorInput] = useState(false);
-  function Connect(e) {
+  async function Connect(e) {
     e.preventDefault();
-    if (link.length > 0) {
+    if (link.length > 0 && !errorInput) {
+      console.log("hello");
       let userID = /^https:\/\/osu.ppy.sh\/users\/(.*)$/g.exec(link);
-      // this is a test
       // set a cookie for the userID
-      axios({
+      await axios({
         method: "post",
         url: "/api/setCookie",
         data: {

@@ -50,11 +50,13 @@ export default function Home({ OSU_API_SECRET, userIDStatus, devStatus }) {
 
   const [userID, setUserID] = useState(false);
   const [error, setError] = useState(false);
-
+  let userIDStatus = false;
   //vérifier l'état des cookies code lorsque l'appli est monté
   useEffect(() => {
-    // on vérifie si le user s'est déjà connecté auparavant et qu'on a toujours son user id stocké en cookie
-    if (userIDStatus) {
+    axios({
+      url: "/api/isUserConnected",
+    }).then((res) => {
+      console.log("connected");
       setUserID(true);
       if (getCookie("code") == "true") {
         document.cookie = "code=false; ";
@@ -69,6 +71,7 @@ export default function Home({ OSU_API_SECRET, userIDStatus, devStatus }) {
       } else {
         //créer le cookie de redirection
         document.cookie = "code=true; ";
+
         try {
           if (devStatus) {
             window.location.href = `http://localhost:5500`;
@@ -80,7 +83,7 @@ export default function Home({ OSU_API_SECRET, userIDStatus, devStatus }) {
           document.cookie = "code=false; ";
         }
       }
-    }
+    });
   }, []);
   return (
     <div className={style.container}>
