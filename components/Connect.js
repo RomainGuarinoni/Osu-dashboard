@@ -26,7 +26,7 @@ export default function Connect({ error, setError, devStatus }) {
             if (devStatus) {
               window.location.href = `http://localhost:5500`;
             } else {
-              window.location.href = `https://osu.ppy.sh/oauth/authorize?client_id=7322&redirect_uri=https://example.com&response_type=code&scope=public`;
+              window.location.href = `https://osu.ppy.sh/oauth/authorize?client_id=7322&redirect_uri=https://osu-dashboard.vercel.app&response_type=code&scope=public`;
             }
           } catch (err) {
             setError(true);
