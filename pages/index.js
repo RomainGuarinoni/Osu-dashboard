@@ -17,6 +17,8 @@ export default function Home({ OSU_API_SECRET, userIDStatus, devStatus }) {
 
   // return the token or an error
   async function getToken(code) {
+    console.log("try get the token");
+    console.log(code);
     await axios({
       method: "post",
       url: "/api/getAccessToken", // a changer pour la prod
@@ -28,6 +30,8 @@ export default function Home({ OSU_API_SECRET, userIDStatus, devStatus }) {
       },
     })
       .then((res) => {
+        console.log("we got the token");
+        console.log(res.data);
         axios({
           method: "post",
           url: "/api/setCookie",
@@ -45,6 +49,8 @@ export default function Home({ OSU_API_SECRET, userIDStatus, devStatus }) {
       })
       .catch((e) => {
         setError(true);
+        console.log("error token");
+        console.log(err);
       });
   }
 
@@ -57,6 +63,7 @@ export default function Home({ OSU_API_SECRET, userIDStatus, devStatus }) {
       if (getCookie("code") == "true") {
         document.cookie = "code=false; ";
         const code = getUrlParam("code");
+        console.log(code);
         const codeAux =
           "def5020032f2819f7eed644a85205ed2c78257259839a64abdeda73f98f36aace3e6f709c21579e60a209d65ff35adc55e315228a1a3f319680554fb6140ad13a7a9511a76ee1abc6357a620ce1aebef3b1a1f82fc50c66fc37b96ba986810c55ec587061032c1c6efac7303a85c2b0f7b4090a082f732a67bf66d060317e9ea6eeee42fc3278a2f9743fba66d1e3c1e0b35f8041765efecc0a63be08d9ab172ba3972361bdba3dc98fbb9f87deb4ccf662cc18cc70724f9d6403f35ed0cd6faf4d7332b103b64757dd4695db59acdd1abc0ff26c482513940465a53cf8301e668af055f8f25f9a53147463c47d6ad3e491f14ac2b4af640383fe43c58113153d55c2fa68aef586d551cc62512857418a04f2bcdc39b5ec72547a0924e72fb310bab7046a7d6076e2ba387daba3afd3bbae151f5dee2ccad582313e5ec1636a8cab96a18218df4cdbfb111c0e55639fb54927326f29da06db91898582a9e6697951d7f8f7320100e541ef8445bde37a6feff6ab9a4912e4648e223c6";
         if (devStatus) {
