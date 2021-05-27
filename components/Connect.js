@@ -2,14 +2,17 @@ import style from "../styles/Connect.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { faGlobeAmericas } from "@fortawesome/free-solid-svg-icons";
+import Loader from "./Loader";
 import { useState } from "react";
 import axios from "axios";
 export default function Connect({ error, setError, devStatus }) {
   const [link, setLink] = useState("");
+  const [loading, setLoading] = useState(false);
   const [errorInput, setErrorInput] = useState(false);
   async function Connect(e) {
     e.preventDefault();
     if (link.length > 0 && !errorInput) {
+      setLoading(true);
       let userID = /^https:\/\/osu.ppy.sh\/users\/(.*)$/g.exec(link);
       // set a cookie for the userID
       await axios({
@@ -30,10 +33,13 @@ export default function Connect({ error, setError, devStatus }) {
             }
           } catch (err) {
             setError(true);
+            setLoading(false);
             document.cookie = "code=false; ";
           }
         })
         .catch((err) => console.log(err));
+    } else {
+      setErrorInput(true);
     }
   }
   function verifyLinkInput(value) {
@@ -67,15 +73,18 @@ export default function Connect({ error, setError, devStatus }) {
               </span>
             </p>
           </div>
-          <button
-            type="submit"
-            className={
-              errorInput ? style.buttonInvalidate : style.buttonValidate
-            }
-            disabled={error}
-          >
-            Log in
-          </button>
+          {!loading && (
+            <button
+              type="submit"
+              className={
+                errorInput ? style.buttonInvalidate : style.buttonValidate
+              }
+              disabled={error}
+            >
+              Log in
+            </button>
+          )}
+          {loading && <Loader />}
         </form>
       </div>
       <div className={style.right}>

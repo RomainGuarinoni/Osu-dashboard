@@ -83,17 +83,6 @@ export default function ContactForm() {
           </p>
         )}
       </form>
-      <footer className={style.footer}>
-        <a
-          href="https://github.com/RomainGuarinoni/Osu-dashboard"
-          target="__blank"
-        >
-          <FontAwesomeIcon className={style.brandIcon} icon={faGithub} />
-        </a>
-        <a href="https://osu.ppy.sh/home" target="__blank">
-          <FontAwesomeIcon className={style.brandIcon} icon={faGlobeAmericas} />
-        </a>
-      </footer>
     </div>
   );
 }
